@@ -78,6 +78,15 @@ lightwp.hc		// Succubus Weapons
 weapons.hc
 tripmine.hc		// UQ tripmines
 
+// Peanut ALL NEW CODE
+p_status.hc
+p_aero.hc
+p_fwave.hc
+//p_flare.hc
+p_magicmod.hc
+p_spellfire.hc
+// Peanut End of new code
+
 impulse.hc
 weather.hc
 

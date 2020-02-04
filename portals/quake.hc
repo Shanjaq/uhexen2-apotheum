@@ -108,7 +108,7 @@ vector dir;
 	self.nextthink = time + 0.1;
 };
 
-void (float richter) MonsterQuake =
+void (float richter, entity source) MonsterQuake =
 {
 	newmis=spawn();
 	newmis.owner=self;
@@ -119,7 +119,8 @@ void (float richter) MonsterQuake =
 	newmis.nextthink=time;
 	newmis.mass=fabs(richter);
 	newmis.lifetime=time + 3;
-	setorigin(newmis,self.origin);
+	setorigin(newmis,source.origin);
+
 //FIXME:  Replace explosion with some other quake-start sound
 	sound(newmis,CHAN_AUTO,"weapons/explode.wav",1,ATTN_NORM);
 	sound(newmis,CHAN_AUTO,"fx/quake.wav",1,ATTN_NORM);

@@ -56,6 +56,39 @@ void ChunkRemove (void)
 	SUB_Remove ();
 }
 
+// Peanut ALL NEW CODE
+// BAER
+void () ChunkShrink = 
+{
+	if (self.abslight > 1.1) {
+		self.abslight -= 0.01;
+		if (self.classname != "tsunami") {
+			self.dmg = ((self.spelldamage + random(self.spelldamage*(-0.12500), self.spelldamage*0.12500))*0.06250)*self.abslight;
+			particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 140.00000, 16, random(1, 15));
+			T_RadiusDamageFlat (self, self.owner, self.dmg, (26.00000*self.abslight), self.owner, FALSE);
+			//T_RadiusDamage (self, self.owner, (self.abslight * 18), other);
+		}
+	} else {
+		self.scale -= 0.05;
+	}
+
+	if ((self.classname == "blackhole") && (self.scale < (0.75 * self.spellradiusmod))) {
+		self.drawflags (-) DRF_TRANSLUCENT;
+	}
+	if (self.scale < 0.1) {
+		if ((self.classname == "blackhole") || (self.classname == "basher") || (self.classname == "flame") || (self.classname == "slimespot"))
+			remove(self);
+		else
+			ChunkRemove();
+		
+	}
+	self.think = ChunkShrink;
+	self.nextthink = time + HX_FRAME_TIME;
+
+};
+
+// Peanut End of new code
+
 vector ChunkVelocity (void)
 {
 vector v;

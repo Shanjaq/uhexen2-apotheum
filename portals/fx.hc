@@ -7,7 +7,6 @@ float RED_PUFF		= 1;
 float GREEN_PUFF	= 2;
 float GREY_PUFF		= 3;
 
-
 void CreateTeleporterBodyEffect (vector org,vector vel,float framelength)
 {
 	starteffect(CE_TELEPORTERBODY, org,vel,framelength);
@@ -524,3 +523,88 @@ void() fx_particle_explosion =
 };
 */
 
+// Peanut ALL NEW CODE
+void ()burn_flame_think = {
+	if (time < self.splash_time)
+	{
+		if (self.goalentity.health)
+		{
+			setorigin (self, randomv(self.goalentity.absmin, self.goalentity.absmax));
+			if (self.owner != world)
+				self.scale = (0.75000 + ((self.owner.burn_cnt / 10.00000) * 1.6)) * random();
+			else
+				self.scale = (0.75000 * random());
+		}
+		else
+		{
+			setorigin (self, self.owner.origin + randomv('-32 -32 0', '32 32 12'));
+			self.scale = (0.75000 * random());
+		}
+		
+		if ((self.owner != world) && (self.owner.burn_time <= time))
+			self.splash_time = time;
+		
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 140.00000, 16, random(4.00000, 10.00000));
+		self.think = burn_flame_think;
+		thinktime self : 0.16250;
+	}
+	else
+	{
+		if (self.owner != world)
+			self.owner.cnt -= 1;
+		self.think = ChunkShrink;
+		thinktime self : HX_FRAME_TIME;
+	}
+};
+
+void ()burn_flame = {
+	newmis = spawn();
+	newmis.owner = self;
+	newmis.goalentity = self.goalentity;
+	newmis.hull = HULL_POINT;
+	newmis.solid = SOLID_NOT;
+	newmis.movetype = MOVETYPE_NOCLIP;
+	setmodel (newmis, "models/flamec.mdl");
+	newmis.classname = "flame";
+	
+	if (self.goalentity.health)
+		setorigin (newmis, newmis.goalentity.origin);
+	else
+		setorigin (newmis, self.origin);
+	
+	newmis.angles_x = 270;
+	newmis.drawflags (+) (MLS_ABSLIGHT | DRF_TRANSLUCENT);
+	newmis.effects = EF_DIMLIGHT;
+	newmis.abslight = 1.00000;
+	newmis.lifetime = 3.00000;
+	newmis.splash_time = (time + newmis.lifetime);
+	thinktime newmis : 0.1;
+	newmis.think = burn_flame_think;
+};
+
+void() bubble_spawner_think = {
+	local entity bubble;
+	local float pc;
+	
+	pc = pointcontents(self.origin);
+	if ( (((pc == CONTENT_WATER) || (pc == CONTENT_SLIME)) || (pc == CONTENT_LAVA)) )
+	{
+		bubble = spawn_temp ( );
+		setmodel ( bubble, "models/s_bubble.spr");
+		setorigin ( bubble, self.origin);
+		bubble.movetype = MOVETYPE_NOCLIP;
+		bubble.solid = SOLID_NOT;
+		bubble.velocity = '0.00000 0.00000 17.00000';
+		thinktime bubble : 0.50000;
+		bubble.think = bubble_bob;
+		bubble.classname = "bubble";
+		bubble.frame = 0.00000;
+		bubble.cnt = 0.00000;
+		bubble.abslight = 0.50000;
+		bubble.drawflags (+) (DRF_TRANSLUCENT | MLS_ABSLIGHT);
+		setsize ( bubble, '-8.00000 -8.00000 -8.00000', '8.00000 8.00000 8.00000');
+	}
+	self.think = bubble_spawner_think;
+	thinktime self : HX_FRAME_TIME;
+};
+// Peanut End of new code

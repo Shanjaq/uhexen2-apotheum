@@ -2272,7 +2272,7 @@ void() PlayerPostThink =
 		else
 			sound (self, CHAN_VOICE, "player/land.wav", 1, ATTN_NORM);
 		if(self.scale>1&&self.jump_flag*(self.mass/10) < -500)
-			MonsterQuake((self.mass/10)*self.jump_flag);
+			MonsterQuake((self.mass/10)*self.jump_flag, self);
 		self.jump_flag = 0;
 	}
 

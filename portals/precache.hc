@@ -2,6 +2,18 @@
  * $Header: /cvsroot/uhexen2/gamecode/hc/portals/precache.hc,v 1.3 2007-02-07 16:59:35 sezero Exp $
  */
 
+// Peanut
+void () Precache_Magic =
+{
+   precache_model ( "models/aero.mdl");
+   precache_model ( "models/finger.mdl");
+   precache_model ( "models/menubar.mdl");
+   precache_model ( "models/spellcharge.mdl");
+   precache_model ( "models/i_spellmod.mdl");
+   precache_model ( "models/spell.mdl");
+   precache_model ( "models/dwarf.mdl");
+};
+
 // called by worldspawn
 void() W_Precache =
 {
@@ -15,6 +27,7 @@ void() W_Precache =
 	//why are these here?
 	precache_model4 ("models/ball.mdl");	//magicmis, icemace
 	precache_model ("models/star.mdl");	//lightwp, magicmis
+	Precache_Magic();
 };
 
 

@@ -589,6 +589,200 @@ void() ImpulseCommands =
 			search = nextent(search);
 		}
 	}*/
+	else if (self.impulse == 55)
+	{
+		self.mage = 1;
+		self.elemana = self.max_mana;
+		self.Lfinger1S = ceil(random(0.5, 36));
+		self.Lfinger2S = ceil(random(0.5, 36));
+		self.Lfinger3S = ceil(random(0.5, 36));
+		self.Lfinger4S = ceil(random(0.5, 36));
+		self.Lfinger5S = ceil(random(0.5, 36));
+
+		self.Rfinger1S = ceil(random(0.5, 36));
+		self.Rfinger2S = ceil(random(0.5, 36));
+		self.Rfinger3S = ceil(random(0.5, 36));
+		self.Rfinger4S = ceil(random(0.5, 36));
+		self.Rfinger5S = ceil(random(0.5, 36));
+
+		self.Lfinger1Support = 0;
+		self.Lfinger2Support = 0;
+		self.Lfinger3Support = 0;
+		self.Lfinger4Support = 0;
+		self.Lfinger5Support = 0;
+
+		self.Rfinger1Support = 0;
+		self.Rfinger2Support = 0;
+		self.Rfinger3Support = 0;
+		self.Rfinger4Support = 0;
+		self.Rfinger5Support = 0;
+		spells_compute(self);
+	}
+	else if (self.impulse == 57)
+	{
+		if (self.mage == 1) {
+			if ((self.handy == 0) || (self.handy == 1)) {
+				if (self.handy == 0) {
+					if (self.Lfinger < 4) {
+						self.Lfinger += 1;
+					} else {
+						self.Lfinger = 0;
+					}
+				}
+				if (self.handy == 1) {
+					if (self.Rfinger > 0) {
+						self.Rfinger -= 1;
+					} else {
+						self.Rfinger = 4;
+					}
+				}
+				spells_compute(self);
+				
+				if (self.handy == 0)
+					self.LfingerC = time + self.spelltop;
+				else if (self.handy == 1)
+					self.RfingerC = time + self.spelltop;
+			}
+		} else {
+			return;
+		}
+	}
+	else if (self.impulse == 58)
+	{
+		if (self.mage == 1) {
+			if ((self.handy == 0) || (self.handy == 1)) {
+				if (self.handy == 0) {
+					if (self.Lfinger > 0) {
+						self.Lfinger -= 1;
+					} else {
+						self.Lfinger = 4;
+					}
+				}
+				if (self.handy == 1) {
+					if (self.Rfinger < 4) {
+						self.Rfinger += 1;
+					} else {
+						self.Rfinger = 0;
+					}
+				}
+				spells_compute(self);
+				
+				if (self.handy == 0)
+					self.LfingerC = time + self.spelltop;
+				else if (self.handy == 1)
+					self.RfingerC = time + self.spelltop;
+			}
+		} else {
+			return;
+		}
+	}
+	else if (self.impulse == 59)
+	{
+		if (self.mage == 1) {
+			if ((self.handy == 0) && (time < self.dest_z))
+			{
+				self.handy = 2;
+				if ((self.Lsupport & SUPPORT_RADIUS) && (time > (self.LfingerC - ((self.spelltop * 0.36250)))))
+					self.LfingerC = time + (self.spelltop * 0.36250);
+			}
+			else
+			{
+				self.handy = 0;
+				spells_compute(self);
+			}
+			spell_marker(0, self.Lfinger);
+			/*
+			if ((self.Lspell == 19) || (self.Lspell == 25) || (self.Lspell == 2)) {
+				if (self.Lspell == 19) {
+					self.click = 1;
+					windball_spawn();
+				}
+				if (self.Lspell == 2) {
+					self.click = 1;
+					light_shell();
+				}
+				if (self.Lspell == 25) {
+					self.handy = 2;
+				}
+			}
+			*/
+		} else {
+			return;
+		}
+	}
+	else if (self.impulse == 60)
+	{
+		if (self.mage == 1) {
+			if ((self.handy == 1) && (time < self.dest_z))
+			{
+				self.handy = 3; 
+				if ((self.Rsupport & SUPPORT_RADIUS) && (time > (self.RfingerC - ((self.spelltop * 0.36250)))))
+					self.RfingerC = time + (self.spelltop * 0.36250);
+			}
+			else
+			{
+				self.handy = 1;
+				spells_compute(self);
+			}
+			spell_marker(1, self.Rfinger);
+			/*
+			if ((self.Rspell == 19) || (self.Rspell == 25) || (self.Rspell == 2)) {
+				if (self.Rspell == 19) {
+					self.click = 1;
+					windball_spawn();
+				}
+				if (self.Rspell == 25) {
+					self.handy = 3; 
+				}
+				if (self.Rspell == 2) {
+					self.click = 1;
+					light_shell();
+				}
+			}
+			*/
+		} else {
+			return;
+		}
+	}
+	else if (self.impulse == 63)
+	{
+		self.click = 0;
+
+		if (self.handy == 2)
+		{
+			if ((self.Lsupport & SUPPORT_RADIUS) && (time > (self.LfingerC - ((self.spelltop * 0.36250)))))
+			{
+				if (self.predebt == 0)
+				{
+					if (self.modding)
+						spellmod_install();
+					else
+						spellfire();
+					
+					self.LfingerC = time + self.spelltop;
+				}
+			}
+			
+			self.handy = 0;
+		}
+		if (self.handy == 3)
+		{
+			if ((self.Rsupport & SUPPORT_RADIUS) && (time > (self.RfingerC - ((self.spelltop * 0.36250)))))
+			{
+				if (self.predebt == 0)
+				{
+					if (self.modding)
+						spellmod_install();
+					else
+						spellfire();
+					
+					self.RfingerC = time + self.spelltop;
+				}
+			}
+			
+			self.handy = 1;
+		}
+	}
 	else if (self.impulse >= 100 && self.impulse <= 115)
 	{
 		Inventory_Quick(self.impulse - 99);

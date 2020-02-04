@@ -8,6 +8,8 @@ void(vector org, vector vel, float damage,entity victim) SpawnPuff;
 
 void() UseInventoryItem;
 void() ImpulseCommands;
+void() spellmod_install;
+void() spellfire;
 
 //============================================================================
 
@@ -1072,6 +1074,57 @@ Called every frame so impulse events can be handled as well as possible
 void() W_WeaponFrame =
 {
 	ImpulseCommands ();
+// Peanut
+	if (self.handy == 2) {
+		//if ((self.Lspell == 25) || (self.Lspell == 2)) {
+		//	if ((self.Lspell == 25) && (self.magic_finished < time))
+		//		frost_launch();
+		///}
+		//else
+		//{
+			if (time >= (self.LfingerC - ((self.spelltop * 0.36250) * ((self.Lsupport & SUPPORT_RADIUS) > 0)))) {
+				if (self.predebt == 0)
+				{
+					if (self.modding)
+					{
+						spellmod_install();
+						self.LfingerC = time + self.spelltop;
+					}
+					else if (!(self.Lsupport & SUPPORT_RADIUS))
+					{
+						spellfire();
+						self.LfingerC = time + self.spelltop;
+					}
+				}
+			}
+		//}
+	}
+	
+	if (self.handy == 3) {
+		//if ((self.Rspell == 25) || (self.Rspell == 2)) {
+		//	if ((self.Rspell == 25) && (self.magic_finished < time))
+		//		frost_launch();
+		//}
+		//else
+		//{
+			if (time >= (self.RfingerC - ((self.spelltop * 0.36250) * ((self.Rsupport & SUPPORT_RADIUS) > 0)))) {
+				if (self.predebt == 0)
+				{
+					if (self.modding)
+					{
+						spellmod_install();
+						self.RfingerC = time + self.spelltop;
+					}
+					else if (!(self.Rsupport & SUPPORT_RADIUS))
+					{
+						spellfire();
+						self.RfingerC = time + self.spelltop;
+					}
+				}
+			}
+		//}
+
+	}
 
 	if (time < self.attack_finished)
 		return;

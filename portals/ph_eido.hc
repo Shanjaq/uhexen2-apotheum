@@ -122,7 +122,7 @@ void ph_eidolon_die () [++ $death1 .. $death105]
 		||self.frame==$death105)
 		sound(self,CHAN_BODY,"eidolon/stomp.wav",1,ATTN_NONE);
 	else if(self.frame==$death95)
-		MonsterQuake(500);
+		MonsterQuake(500, self);
 
 	if(self.frame==$death105)
 		self.nextthink=-1;

@@ -318,6 +318,37 @@ void end_sys_fields;
 		float raven_cnt;		// Number of raven's this guys has in the world
 		float newclass;			// If doing a quick class change
 		float sheep_call;
+// Peanut ALL NEW CODE
+		float mage;
+		float elemana;
+		float menuhand;
+		float menuitem;
+		float handy;
+		float click;
+		float handy;
+		float modding;
+		float trap_count;
+		float fingery;
+		float Lfinger;
+		float Rfinger;
+		float Lspell;
+		float Rspell;
+		float Lsupport;
+		float Rsupport;
+		float spelltop;
+		float spellcost;
+		float spelldamage;
+		float spellradiusmod;
+		float Lfinger1S, Lfinger2S, Lfinger3S, Lfinger4S, Lfinger5S;
+		float Rfinger1S, Rfinger2S, Rfinger3S, Rfinger4S, Rfinger5S;
+		float Lfinger1Support, Lfinger2Support, Lfinger3Support, Lfinger4Support, Lfinger5Support;
+		float Rfinger1Support, Rfinger2Support, Rfinger3Support, Rfinger4Support, Rfinger5Support;
+		float LfingerC;
+		float RfingerC;
+		float predebt;
+		float debt;
+		float inv_spellmods;
+// Peanut End of new code
 	};
 /*	struct // Talking heads
 	{		
@@ -499,6 +530,37 @@ void end_sys_fields;
 		// super_damage becoming negative..
 		vector dest, dest1, dest2;	//9 spots unioned
 	};
+// Peanut ALL NEW CODE
+	struct
+	{
+		float burn_time;
+		float poison_time;
+		float wet_time;
+		float toxic_time;
+		float burn_next;
+		float poison_next;
+		float wet_next;
+		float toxic_next;
+		float burn_dmg;
+		float poison_dmg;
+		float wet_dmg;
+		float toxic_dmg;
+		float burn_cnt;
+		float poison_cnt;
+		float burn_duration;
+		float poison_duration;
+	};
+// misc fields
+	struct
+	{
+		float menubar_type;
+		float step1;
+		float step2;
+		float step3;
+		float step4;
+		float auraV;
+	};
+// Peanut End of new code
 };
 
 //Needed to remember set gravity compared to other grav changes
@@ -768,3 +830,23 @@ entity	sight_entity;	//So monsters wake up other monsters
 .float fire_damage;
 .float scoped;
 
+// Peanut ALL NEW CODE
+entity status_head;
+.entity chain2;
+.float status_effects;
+.float spelldamage;
+.float spellradiusmod;
+
+
+.float	dmgtime;
+.float	healamount, healtype;
+.float anglespeed;
+.float angletime;
+.float movetime;
+.float hit_z;
+.float torncount;
+.entity path_last;
+.float dflags;
+.float init_exp_val;
+.vector init_org;
+// Peanut End of new code

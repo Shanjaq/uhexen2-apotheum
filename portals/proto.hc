@@ -32,7 +32,7 @@ void stats_NewPlayer(entity e);
 void(entity light_targ)lightstyle_change;
 void(entity targ, entity attacker,entity inflictor,float damage) Killed;
 
-void(float richter) MonsterQuake;
+void(float richter, entity source) MonsterQuake; //Peanut
 void() MultiExplode;
 void(entity targ, entity attacker, entity inflictor) ClientObituary;
 void(entity loser,float number)drop_level;
@@ -75,4 +75,8 @@ void(entity thingy)unsheep;
 void()PlayerTouch;
 void SmallExplosion (void);
 
-
+// Peanut ALL NEW CODE
+void apply_status (entity forent, float status_effect, float damage, float duration);
+entity T_RadiusDamageFlat (entity inflictor, entity attacker, float damage, float radius, entity ignore, float dmgflags);
+void bubble_bob();
+// Peanut End of new code
