@@ -337,8 +337,6 @@ void end_sys_fields;
 		float Rsupport;
 		float spelltop;
 		float spellcost;
-		float spelldamage;
-		float spellradiusmod;
 		float Lfinger1S, Lfinger2S, Lfinger3S, Lfinger4S, Lfinger5S;
 		float Rfinger1S, Rfinger2S, Rfinger3S, Rfinger4S, Rfinger5S;
 		float Lfinger1Support, Lfinger2Support, Lfinger3Support, Lfinger4Support, Lfinger5Support;
@@ -531,26 +529,35 @@ void end_sys_fields;
 		vector dest, dest1, dest2;	//9 spots unioned
 	};
 // Peanut ALL NEW CODE
+	//Status Effect Controller
 	struct
 	{
+		//base interval
 		float burn_time;
 		float poison_time;
 		float wet_time;
 		float toxic_time;
+		float paralyze_time;
+		
+		//next interval
 		float burn_next;
 		float poison_next;
-		float wet_next;
 		float toxic_next;
+		
+		//intensity
 		float burn_dmg;
 		float poison_dmg;
-		float wet_dmg;
 		float toxic_dmg;
+		
+		//stacking
 		float burn_cnt;
 		float poison_cnt;
+		
+		//duration
 		float burn_duration;
 		float poison_duration;
 	};
-// misc fields
+	// misc fields
 	struct
 	{
 		float menubar_type;
@@ -558,7 +565,22 @@ void end_sys_fields;
 		float step2;
 		float step3;
 		float step4;
-		float auraV;
+	};
+	// cloud fields
+	struct
+	{
+		float type_index;
+		float cloud_style;
+		float cloud_height;
+		float glow_dest;
+		float glow_last;
+		float glow_delay;
+		float glow_time;
+		float melee_rate_low;
+		float melee_rate_high;
+		float missile_rate_low;
+		float missile_rate_high;
+		float missile_count;
 	};
 // Peanut End of new code
 };
@@ -829,24 +851,3 @@ entity	sight_entity;	//So monsters wake up other monsters
 
 .float fire_damage;
 .float scoped;
-
-// Peanut ALL NEW CODE
-entity status_head;
-.entity chain2;
-.float status_effects;
-.float spelldamage;
-.float spellradiusmod;
-
-
-.float	dmgtime;
-.float	healamount, healtype;
-.float anglespeed;
-.float angletime;
-.float movetime;
-.float hit_z;
-.float torncount;
-.entity path_last;
-.float dflags;
-.float init_exp_val;
-.vector init_org;
-// Peanut End of new code

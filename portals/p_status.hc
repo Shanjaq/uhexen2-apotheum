@@ -188,8 +188,6 @@ void() toxic_status_effect =
 	}
 };
 
-
-
 void() status_controller_think =
 {
 	local vector pos;
@@ -266,6 +264,20 @@ void() status_controller_think =
 				self.goalentity.status_effects (-) STATUS_WET;
 		}
 		
+		if (self.paralyze_time > time)
+		{
+			if (!(self.goalentity.status_effects & STATUS_PARALYZE))
+				self.goalentity.status_effects (+) STATUS_PARALYZE;
+			
+			pos = randomv(self.goalentity.absmin, self.goalentity.absmax);
+			particle2 ( pos, '-30.00000 -30.00000 -30.00000', '30.00000 30.00000 30.00000', (16.00000 + random(15.00000)), PARTICLETYPE_FASTGRAV, random(64, 80));
+		}
+		else
+		{
+			if (self.goalentity.status_effects & STATUS_PARALYZE)
+				self.goalentity.status_effects (-) STATUS_PARALYZE;
+		}
+		
 		if (self.toxic_time > time)
 		{
 			if (!(self.goalentity.status_effects & STATUS_TOXIC))
@@ -297,6 +309,7 @@ float STATUS_GET_AVERAGE = 2;
 float STATUS_GET_HIGHEST = 4;
 float STATUS_GET_LOWEST = 8;
 float STATUS_GET_ANY = 16;
+float STATUS_GET_OWNER = 32;
 
 entity(entity forent, float query_flags) status_controller_get =
 {
@@ -379,7 +392,6 @@ void(entity forent, float status_effect, float damage, float duration) apply_sta
 		{
 			status = status_controller_get(forent, (STATUS_GET_CREATE | STATUS_GET_ANY));
 			status.wet_time = (time + duration);
-			status.wet_dmg = damage;
 		}
 
 		if (status_effect & STATUS_TOXIC)
@@ -390,6 +402,12 @@ void(entity forent, float status_effect, float damage, float duration) apply_sta
 				status.toxic_time = (time + duration);
 				status.toxic_dmg = damage;
 			}
+		}
+
+		if (status_effect & STATUS_PARALYZE)
+		{
+			status = status_controller_get(forent, (STATUS_GET_CREATE | STATUS_GET_ANY));
+			status.paralyze_time = (time + duration);
 		}
 	}
 };
@@ -414,6 +432,9 @@ void(entity forent, float status_effect) remove_status =
 
 			if (status_effect & STATUS_TOXIC)
 				status.toxic_time = time;
+			
+			if (status_effect & STATUS_PARALYZE)
+				status.paralyze_time = time;
 		}
 		
 		status = status.chain2;
@@ -433,5 +454,17 @@ void() check_statuses =
 		dprintf(" : %s\n", i);
 		i += 1;
 		status = status.chain2;
+	}
+};
+
+//void(entity forent, float status_effect, float damage, float duration) apply_status =
+void(float status_effect) test_status =
+{
+	makevectors (self.v_angle);
+	traceline (self.origin + self.proj_ofs, ((self.origin + self.proj_ofs)+(v_forward * 300)) , FALSE , self);
+	SpawnPuff ( trace_endpos, '0.00000 0.00000 0.00000', 20.00000, trace_ent);
+	if (trace_ent != world)
+	{
+		apply_status(trace_ent, status_effect, 10, 10);
 	}
 };

@@ -1333,6 +1333,35 @@ float DFL_SKIP_WOOD = 4;
 float DFL_SKIP_STONE = 8;
 float DFL_SKIP_METAL = 16;
 
+void() SUB_NullDeath =
+{
+	
+	if (self.flags & FL_MONSTER)
+	{
+		MonsterDropStuff();
+		self.th_missile = SUB_Null;
+		self.th_melee = SUB_Null;
+		self.oldthink = SUB_Null;
+		self.th_pain = SUB_Null;
+		self.th_run = SUB_Null;
+		self.th_walk = SUB_Null;
+		self.th_stand = SUB_Null;
+	}
+	else
+		DropBackpack();
+	
+	SUB_UseTargets ( );
+	
+	if (self.th_die)
+	{
+		if (self.th_die != chunk_death)
+			self.th_die();
+	}
+	
+	self.think = SUB_Remove;
+	thinktime self : HX_FRAME_TIME;
+};
+
 entity (entity inflictor, entity attacker, float damage, float radius, entity ignore, float dmgflags)T_RadiusDamageFlat = {
 	local entity found, first, last;
 	local float skip;

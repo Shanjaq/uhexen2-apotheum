@@ -7,9 +7,17 @@ progs.dat
 
 global.hc
 entity.hc
+
 constant.hc
 builtin.hc
 proto.hc
+
+// Peanut ALL NEW CODE
+p_global.hc
+p_entity.hc
+p_constant.hc
+p_proto.hc
+// Peanut End of new code
 
 math.hc
 strings.hc
@@ -79,10 +87,20 @@ weapons.hc
 tripmine.hc		// UQ tripmines
 
 // Peanut ALL NEW CODE
+p_fx.hc
+p_clouds.hc
 p_status.hc
-p_aero.hc
 p_fwave.hc
-//p_flare.hc
+p_frog.hc
+p_flare.hc
+p_spire.hc
+p_aero.hc
+p_bushbash.hc
+p_coldsp.hc
+p_icage.hc
+p_crushdrop.hc
+p_dmatter.hc
+p_darkbeam.hc
 p_magicmod.hc
 p_spellfire.hc
 // Peanut End of new code

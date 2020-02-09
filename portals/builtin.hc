@@ -100,7 +100,7 @@ float fabs(float f) : 43;
 
 // Returns a shooting vector.
 vector aim(entity e,vector d,float speed) : 44;
-
+vector aim2(entity prm1, float prm2) : 44;
 // Returns the cvar value.
 float cvar(string s) : 45;
 

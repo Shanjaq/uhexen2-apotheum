@@ -191,38 +191,38 @@ void ()spell_status_marker_think = {
 	self.velocity = self.owner.velocity;
 	slot_angle = self.angles;
 	
-	slot_angle_z = slot_angle_z + ((360.00000 / 5.00000) * self.auraV);
+	slot_angle_z = slot_angle_z + ((360.00000 / 5.00000) * self.count);
 	slot_angle_x *= -1;
 	
 
 	if (self.owner.dest_x == 0)
 	{
-		if ((spell_support[self.owner.Lspell]) & fexp(2, self.auraV))
-			self.skin = self.auraV;
+		if ((spell_support[self.owner.Lspell]) & fexp(2, self.count))
+			self.skin = self.count;
 		else
 			self.skin = 5;
 		
 		self.dest = (trace_endpos - (v_right * 15));
 		makevectors (slot_angle);
 		setorigin (self, (self.dest + (v_up * 8)));
-		if ((self.owner.Lsupport & fexp(2, self.auraV)) && (self.drawflags & DRF_TRANSLUCENT))
+		if ((self.owner.Lsupport & fexp(2, self.count)) && (self.drawflags & DRF_TRANSLUCENT))
 			self.drawflags (-) DRF_TRANSLUCENT;
-		else if (!(self.owner.Lsupport & fexp(2, self.auraV)) && !(self.drawflags & DRF_TRANSLUCENT))
+		else if (!(self.owner.Lsupport & fexp(2, self.count)) && !(self.drawflags & DRF_TRANSLUCENT))
 			self.drawflags (+) DRF_TRANSLUCENT;
 	}
 	else if (self.owner.dest_x == 1)
 	{
-		if ((spell_support[self.owner.Rspell]) & fexp(2, self.auraV))
-			self.skin = self.auraV;
+		if ((spell_support[self.owner.Rspell]) & fexp(2, self.count))
+			self.skin = self.count;
 		else
 			self.skin = 5;
 		
 		self.dest = (trace_endpos + (v_right * 15));
 		makevectors (slot_angle);
 		setorigin (self, (self.dest + (v_up * 8)));
-		if ((self.owner.Rsupport & fexp(2, self.auraV)) && (self.drawflags & DRF_TRANSLUCENT))
+		if ((self.owner.Rsupport & fexp(2, self.count)) && (self.drawflags & DRF_TRANSLUCENT))
 			self.drawflags (-) DRF_TRANSLUCENT;
-		else if (!(self.owner.Rsupport & fexp(2, self.auraV)) && !(self.drawflags & DRF_TRANSLUCENT))
+		else if (!(self.owner.Rsupport & fexp(2, self.count)) && !(self.drawflags & DRF_TRANSLUCENT))
 			self.drawflags (+) DRF_TRANSLUCENT;
 	}
 
@@ -241,7 +241,7 @@ void ()spell_status_marker = {
 	while (i < 5)
 	{
 		newmis = spawn();
-		newmis.auraV = i;
+		newmis.count = i;
 		newmis.skin = 5;
 		newmis.hull = HULL_POINT;
 		newmis.owner = self;
@@ -447,44 +447,44 @@ void ()spell_marker_think = {
 	self.skin = 6;
 
 	if (self.owner.dest_x == 0) {
-		self.angles_z = (self.angles_z + (self.auraV * 20));
+		self.angles_z = (self.angles_z + (self.count * 20));
 		setorigin (self, (trace_endpos - (v_right * 15)));
-		if ((self.owner.Lfinger1S > 0) && (self.auraV == 0))
+		if ((self.owner.Lfinger1S > 0) && (self.count == 0))
 			self.skin = (((self.owner.Lfinger1S - 1) - fmod((self.owner.Lfinger1S - 1), 6)) / 6);
 
-		if ((self.owner.Lfinger2S > 0) && (self.auraV == 1))
+		if ((self.owner.Lfinger2S > 0) && (self.count == 1))
 			self.skin = (((self.owner.Lfinger2S - 1) - fmod((self.owner.Lfinger2S - 1), 6)) / 6);
 
-		if ((self.owner.Lfinger3S > 0) && (self.auraV == 2))
+		if ((self.owner.Lfinger3S > 0) && (self.count == 2))
 			self.skin = (((self.owner.Lfinger3S - 1) - fmod((self.owner.Lfinger3S - 1), 6)) / 6);
 
-		if ((self.owner.Lfinger4S > 0) && (self.auraV == 3))
+		if ((self.owner.Lfinger4S > 0) && (self.count == 3))
 			self.skin = (((self.owner.Lfinger4S - 1) - fmod((self.owner.Lfinger4S - 1), 6)) / 6);
 
-		if ((self.owner.Lfinger5S > 0) && (self.auraV == 4))
+		if ((self.owner.Lfinger5S > 0) && (self.count == 4))
 			self.skin = (((self.owner.Lfinger5S - 1) - fmod((self.owner.Lfinger5S - 1), 6)) / 6);
 
 	}
 	if (self.owner.dest_x == 1) {
-		self.angles_z = (self.angles_z - (self.auraV * 20));
+		self.angles_z = (self.angles_z - (self.count * 20));
 		setorigin (self, (trace_endpos + (v_right * 15)));
-		if ((self.owner.Rfinger1S > 0) && (self.auraV == 0))
+		if ((self.owner.Rfinger1S > 0) && (self.count == 0))
 			self.skin = (((self.owner.Rfinger1S - 1) - fmod((self.owner.Rfinger1S - 1), 6)) / 6);
 
-		if ((self.owner.Rfinger2S > 0) && (self.auraV == 1))
+		if ((self.owner.Rfinger2S > 0) && (self.count == 1))
 			self.skin = (((self.owner.Rfinger2S - 1) - fmod((self.owner.Rfinger2S - 1), 6)) / 6);
 
-		if ((self.owner.Rfinger3S > 0) && (self.auraV == 2))
+		if ((self.owner.Rfinger3S > 0) && (self.count == 2))
 			self.skin = (((self.owner.Rfinger3S - 1) - fmod((self.owner.Rfinger3S - 1), 6)) / 6);
 
-		if ((self.owner.Rfinger4S > 0) && (self.auraV == 3))
+		if ((self.owner.Rfinger4S > 0) && (self.count == 3))
 			self.skin = (((self.owner.Rfinger4S - 1) - fmod((self.owner.Rfinger4S - 1), 6)) / 6);
 
-		if ((self.owner.Rfinger5S > 0) && (self.auraV == 4))
+		if ((self.owner.Rfinger5S > 0) && (self.count == 4))
 			self.skin = (((self.owner.Rfinger5S - 1) - fmod((self.owner.Rfinger5S - 1), 6)) / 6);
 	}
 
-	if (self.owner.dest_y == self.auraV) {
+	if (self.owner.dest_y == self.count) {
 		if (self.drawflags (+) DRF_TRANSLUCENT)
 		self.drawflags (-) DRF_TRANSLUCENT;
 	} else {
@@ -516,7 +516,7 @@ void (float thehand, float thefinger)spell_marker = {
 		self.menuhand = (thehand + 1);
 		while (i < 5) {
 			newmis = spawn();
-			newmis.auraV = i;
+			newmis.count = i;
 			newmis.hull = HULL_POINT;
 			newmis.owner = self;
 			newmis.solid = SOLID_NOT;
@@ -770,107 +770,103 @@ void() spellfire_cast = {
 	
 	self.velocity = '0 0 0';
 
-	/*
-	if (self.Lspell == 1) {
-		launch_pk( );
-	}
+	
+//	if (self.Lspell == 1) {
+//		launch_pk( );
+//	}
 	
 	//if (self.Lspell == 2) {
 		//shell of light
 	//}
 
-	if (self.Lspell == 3) {
-		teleport_spell();
-	}
+//	if (self.Lspell == 3) {
+//		teleport_spell();
+//	}
 
-	if (self.Lspell == 4) {
-		CometFall();
-	}
+//	if (self.Lspell == 4) {
+//		CometFall();
+//	}
 
-	if (self.Lspell == 5) {
-		photon_ball();	
-	}
+//	if (self.Lspell == 5) {
+//		photon_ball();	
+//	}
 
-	if (self.Lspell == 6) {
-		supernova_init();
-	}
-	*/
+//	if (self.Lspell == 6) {
+//		supernova_init();
+//	}
 
 	if (self.Lspell == 7) {
 		AxeSpikes();
 	}
 
-	/*
-	if (self.Lspell == 8) {
-		W_FireLeapFrog();							
-	}
+//	if (self.Lspell == 8) {
+//		W_FireLeapFrog();							
+//	}
 
-	if (self.Lspell == 9) {
-		balloffire_launch();							
-	}
+//	if (self.Lspell == 9) {
+//		balloffire_launch();							
+//	}
 
-	if (self.Lspell == 10) {
-		obj_redM4();							
-	}
+//	if (self.Lspell == 10) {
+//		obj_redM4();							
+//	}
 
-	if (self.Lspell == 11) {
-		volcano_start();							
-	}
+//	if (self.Lspell == 11) {
+//		volcano_start();							
+//	}
 
 	if (self.Lspell == 12) {
 		flare_drop();							
 	}
 
-	if (self.Lspell == 13) {
-		obj_yellowM1();
-	}
+//	if (self.Lspell == 13) {
+//		obj_yellowM1();
+//	}
 
 	if (self.Lspell == 14) {
 		spire_drop ( );
 	}
 
-	if (self.Lspell == 15) {
-		deatharc_launch();
-	}
+//	if (self.Lspell == 15) {
+//		deatharc_launch();
+//	}
 
-	if (self.Lspell == 16) {
-		lchain_launch ( );
-	}
+//	if (self.Lspell == 16) {
+//		lchain_launch ( );
+//	}
 
-	if (self.Lspell == 17) {
-		SlideDrop ( );
-	}
-	if (self.Lspell == 18) {
-		storm_launch();
+//	if (self.Lspell == 17) {
+//		SlideDrop ( );
+//	}
 
-	}
+//	if (self.Lspell == 18) {
+//		storm_launch();
+//	}
 
 	//	if (self.Lspell == 19) {
 	//		windball_spawn();
 	//	}
-	*/
 	
 	if (self.Lspell == 20) {
 		//launch_aero();
 		aero_init();
 	}
 	
-	/*
-	if (self.Lspell == 21) {
-		bushbash_touch();
-	}
+//	if (self.Lspell == 21) {
+//		bushbash_touch();
+//	}
 
-	if (self.Lspell == 22) {
-		TelluricRegen();
-	}
+//	if (self.Lspell == 22) {
+//		TelluricRegen();
+//	}
 
-	if (self.Lspell == 23) {
-		launch_tol();	
-	}
+//	if (self.Lspell == 23) {
+//		launch_tol();	
+//	}
 
-	if (self.Lspell == 24) {
-		twister_launch();
-	}
+//	if (self.Lspell == 24) {
+//		twister_launch();
+//	}
 
 	//	if (self.Lspell == 25) {
 	//		frost_launch();
@@ -880,35 +876,35 @@ void() spellfire_cast = {
 		coldsp_launch();
 	}
 
-	if (self.Lspell == 27) {
-		cage_launch();
-	}
+//	if (self.Lspell == 27) {
+//		cage_launch();
+//	}
 
 	if (self.Lspell == 28) {
 		launch_crushdrop();	
 	}
 
-	if (self.Lspell == 29) {
-		LaunchGlacierspawner();
-	}
+//	if (self.Lspell == 29) {
+//		LaunchGlacierspawner();
+//	}
 
-	if (self.Lspell == 30) {
+//	if (self.Lspell == 30) {
 		//tsunami_launch();
-		tsunami_test();
-	}
+//		tsunami_test();
+//	}
 
-	if (self.Lspell == 31) {
-		launch_swarm();
-	}
+//	if (self.Lspell == 31) {
+//		launch_swarm();
+//	}
 
-	if (self.Lspell == 32) {
-		blackdeath_swoop ( );
+//	if (self.Lspell == 32) {
+//		blackdeath_swoop ( );
 		//blackdeath_launch();
-	}
+//	}
 
-	if (self.Lspell == 33) {
-		toxic_cloud();
-	}
+//	if (self.Lspell == 33) {
+//		toxic_cloud();
+//	}
 
 	if (self.Lspell == 34) {
 		dark_matter_init();
@@ -918,10 +914,9 @@ void() spellfire_cast = {
 		darkbeam();
 	}
 
-	if (self.Lspell == 36) {
-		bh_ball_drop();	
-	}
-	*/
+//	if (self.Lspell == 36) {
+//		bh_ball_drop();	
+//	}
 	
 	remove ( self);
 };

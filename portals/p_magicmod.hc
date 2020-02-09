@@ -125,11 +125,11 @@ void() spellmod_marker_think =
 		if (self.skin != self.owner.menuitem)
 			self.skin = self.owner.menuitem;
 		
-		if (self.owner.auraV && (self.drawflags & DRF_TRANSLUCENT))
+		if (self.owner.state && (self.drawflags & DRF_TRANSLUCENT))
 		{
 			self.drawflags (-) DRF_TRANSLUCENT;
 		}
-		else if (!self.owner.auraV && !(self.drawflags & DRF_TRANSLUCENT))
+		else if (!self.owner.state && !(self.drawflags & DRF_TRANSLUCENT))
 		{
 			self.drawflags (+) DRF_TRANSLUCENT;
 		}
@@ -204,7 +204,7 @@ void() magic_workbench_think = {
 				if (self.goalentity == world)
 					spellmod_marker();
 				
-				if ( (vlen(found.origin - self.origin) < (radius / 2)) && (self.auraV) )
+				if ( (vlen(found.origin - self.origin) < (radius / 2)) && (self.state) )
 				{
 					centerprint(found, "Cast a spell on the sphere to install this modifier.");
 				}
@@ -244,8 +244,8 @@ void() magic_workbench_think = {
 	{
 		//tmp = fexp(2, self.menuitem);
 		//tmp = fexp(tmp, 2);
-		//self.auraV = ((nearest.inv_spellmods & (tmp * 3)) > 0.00000);
-		self.auraV = ((nearest.inv_spellmods & (fexp(fexp(2, self.menuitem), 2) * 3)) > 0.00000);
+		//self.state = ((nearest.inv_spellmods & (tmp * 3)) > 0.00000);
+		self.state = ((nearest.inv_spellmods & (fexp(fexp(2, self.menuitem), 2) * 3)) > 0.00000);
 	}
 	
 	thinktime self : 0.12500;

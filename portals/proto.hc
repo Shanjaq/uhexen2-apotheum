@@ -74,9 +74,3 @@ void(vector p1, vector p2, entity from, float damage,string type) LightningDamag
 void(entity thingy)unsheep;
 void()PlayerTouch;
 void SmallExplosion (void);
-
-// Peanut ALL NEW CODE
-void apply_status (entity forent, float status_effect, float damage, float duration);
-entity T_RadiusDamageFlat (entity inflictor, entity attacker, float damage, float radius, entity ignore, float dmgflags);
-void bubble_bob();
-// Peanut End of new code

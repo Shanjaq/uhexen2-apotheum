@@ -589,6 +589,10 @@ void() ImpulseCommands =
 			search = nextent(search);
 		}
 	}*/
+	else if (self.impulse == 54)
+	{
+		test_status(STATUS_PARALYZE);
+	}
 	else if (self.impulse == 55)
 	{
 		self.mage = 1;
