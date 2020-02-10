@@ -32,7 +32,7 @@ void stats_NewPlayer(entity e);
 void(entity light_targ)lightstyle_change;
 void(entity targ, entity attacker,entity inflictor,float damage) Killed;
 
-void(float richter, entity source) MonsterQuake; //Peanut
+void(float richter) MonsterQuake;
 void() MultiExplode;
 void(entity targ, entity attacker, entity inflictor) ClientObituary;
 void(entity loser,float number)drop_level;

@@ -1,3 +1,4 @@
+void() ShakeRattleAndRoll;
 
 void ()burn_flame_think = {
 	if (time < self.splash_time)
@@ -325,6 +326,41 @@ void(float amount, float radius, float force) liquid_spray = {
 	missile.think = liquid_fly;
 };
 
+/*
+void(vector pos) liquid_drop =
+{
+	local entity chunk, found;
+	
+	chunk = spawn_temp();
+	chunk.spelldamage = self.spelldamage;
+	chunk.spellradiusmod = self.spellradiusmod;
+	chunk.ltime = time;
+	chunk.owner = self.owner;
+	chunk.lifetime = random(3.00000, 5.00000);
+	chunk.splash_time = time + chunk.lifetime;
+	chunk.classname = "slimespot";
+	chunk.movetype = MOVETYPE_NOCLIP;
+	chunk.solid = SOLID_NOT;
+	//chunk.cnt = (1 + random(3));
+	chunk.think = liquid_drop_timer;
+	thinktime chunk : HX_FRAME_TIME;
+
+	setmodel (chunk, "models/bloodspot.mdl");
+	chunk.skin = 2;
+	chunk.scale = (0.25000 + random(1.62500));
+	setsize (chunk, '0 0 0', '0 0 0');
+	setorigin (chunk, pos);
+	chunk.angles = random('0.00000 -180.00000 0.00000','0.00000 180.00000 0.00000');
+	
+	found = T_RadiusDamageFlat (chunk, chunk.owner, (chunk.spelldamage + random(chunk.spelldamage*(-0.12500), chunk.spelldamage*0.12500))*0.12500, 128.00000, chunk.owner, 2);
+	while (found)
+	{
+		apply_status(found, STATUS_TOXIC, (self.spelldamage * 0.12500), random(7, 11));
+		found = found.chain2;
+	}
+};
+*/
+
 void() squelch = {
 	self.colormap = 0;
 	//setorigin(self, (self.jones.origin - '0 0 3900'));
@@ -488,4 +524,142 @@ void (float howbig, float howmuch)IceBoom =
 	self.nextthink = 0.5;
 	self.think = coldsp_timer;
 
+};
+
+void  ()splashz = {
+	if (self.frame>4) {
+		self.think = SUB_Remove;
+		self.nextthink = (time + 0);
+		return;
+	} else {
+		self.frame = (self.frame + 1);
+		self.think = splashz;
+		self.nextthink = (time + 0.08);
+	}
+};
+void  ()splashy = {
+	local entity splash;
+
+	splash = spawn();
+	setorigin (splash, self.origin);
+	splash.solid = SOLID_NOT;
+	splash.drawflags = MLS_ABSLIGHT;
+	splash.effects = EF_DIMLIGHT;
+	setmodel (splash, "models/splashy.mdl");
+	splash.abslight = 0.5;
+	splash.owner = self.owner;
+	splash.lip = self.lip;
+	splash.skin = 0;
+	splash.frame = 0;
+	splash.angles = (self.angles);
+	splash.think = splashz;
+	splash.nextthink = (time + 0.02);
+	//if (self.auraV == 1) {
+	//	self.skin = 5;
+	//}
+	if (self.skin == 0) {
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 140.00000, 2, 80.00000);
+		sound ( splash, CHAN_VOICE, "chit1.wav", 1.00000, ATTN_NORM);
+	}
+
+	if (self.skin == 1) {
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 174.00000, 2, 80.00000);
+		sound ( splash, CHAN_VOICE, "chit1.wav", 1.00000, ATTN_NORM);
+	}
+
+	if (self.skin == 2) {
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 245.00000, 17, 80.00000);
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 245.00000, 2, 80.00000);
+		sound ( splash, CHAN_VOICE, "chit2.wav", 1.00000, ATTN_NORM);
+	}
+
+	if (self.skin == 3) {
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 248.00000, 17, 80.00000);
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 250.00000, 17, 80.00000);
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 249.00000, 2, 80.00000);
+		sound ( splash, CHAN_VOICE, "chit2.wav", 1.00000, ATTN_NORM);
+	}
+
+	if (self.skin == 4) {
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 241.00000, 17, 80.00000);
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 242.00000, 17, 80.00000);
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 240.00000, 17, 80.00000);
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 241.00000, 1, 80.00000);
+		sound ( splash, CHAN_VOICE, "chit2.wav", 1.00000, ATTN_NORM);
+	}
+
+	if (self.skin == 5) {
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', random(112, 127), 17, 80.00000);
+		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', random(168, 175), 2, 80.00000);
+		sound ( splash, CHAN_VOICE, "golem/stomp.wav", 1.00000, ATTN_NORM);
+	}
+
+
+	remove(self);
+};
+
+void  ()charge_touch =  {
+	if ( (((other == world) || (other.solid == SOLID_BSP)) || (other.mass > 300.00000)) ) {
+		splashy();
+		//      DarkExplosion ( );
+	} else {
+
+		if ( (other != self.enemy) ) {
+
+			if ( other.takedamage ) {
+
+				self.enemy = other;
+				makevectors ( self.velocity);
+				T_Damage ( other, self, self.owner, self.dmg);
+				if ( (self.dmg < 10.00000) ) {
+
+					T_Damage ( other, self, self.owner, 10.00000);
+					splashy();         
+					//DarkExplosion ( );
+				} else {
+
+					SpawnPuff ( self.origin, self.velocity, 10.00000, other);
+					SpawnPuff ( (self.origin + (v_forward * 36.00000)), self.velocity, 10.00000, other);
+					if ( (other.thingtype == THINGTYPE_FLESH) ) {
+
+						sound ( self, CHAN_VOICE, "assassin/core.wav", 1.00000, ATTN_NORM);
+						MeatChunks ( (self.origin + (v_forward * 36.00000)), (((self.velocity * 0.20000) + (v_right * random(-30.00000,150.00000))) + (v_up * random(-30.00000,150.00000))), 5.00000, other);
+
+					}
+					if ( (other.classname == "player") ) {
+
+						T_Damage ( other, self, self.owner, ((self.dmg + (self.frags * 10.00000)) / 3.00000));
+					} else {
+
+						T_Damage ( other, self, self.owner, (self.dmg + (self.frags * 10.00000)));
+
+					}
+					self.frags += 1.00000;
+					self.dmg -= 10.00000;
+
+				}
+
+			}
+
+		}
+
+	}
+};
+
+void (float richter, entity source) MonsterQuake2 =
+{
+	newmis=spawn();
+	newmis.owner=self;
+	newmis.solid=SOLID_NOT;
+	newmis.movetype=MOVETYPE_NONE;
+	newmis.classname="quake";
+	newmis.think=ShakeRattleAndRoll;
+	newmis.nextthink=time;
+	newmis.mass=fabs(richter);
+	newmis.lifetime=time + 3;
+	setorigin(newmis,source.origin);
+
+//FIXME:  Replace explosion with some other quake-start sound
+	sound(newmis,CHAN_AUTO,"weapons/explode.wav",1,ATTN_NORM);
+	sound(newmis,CHAN_AUTO,"fx/quake.wav",1,ATTN_NORM);
 };

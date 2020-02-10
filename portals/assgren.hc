@@ -139,7 +139,7 @@ float attack_counter,number_explosions;
 		if(self.classname=="multigrenade")
 		{
 			if(random()<0.3)
-				MonsterQuake(200, self);
+				MonsterQuake(200);
 			MultiExplode();
 		}
 		else

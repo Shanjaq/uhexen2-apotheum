@@ -1096,7 +1096,7 @@ void GolemBStompEffect(void)
 
 	dist = vlen(self.enemy.origin - self.origin);
 
-	MonsterQuake(350, self);	
+	MonsterQuake(350);	
 
 	if (dist < 350)
 		T_Damage(self.enemy, self, self, random(50/dist));

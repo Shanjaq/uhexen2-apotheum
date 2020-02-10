@@ -152,7 +152,7 @@ void orb_die()
 	self.owner.think=multiplayer_health;
 	thinktime self.owner : 0;
 	sound(self,CHAN_AUTO,"eidolon/orbxpld.wav",1,ATTN_NONE);
-	MonsterQuake(500, self);
+	MonsterQuake(500);
 	MultiExplode();
 }
 
@@ -561,7 +561,7 @@ void eidolon_die () [++ $howl1 .. $howl60]
 		sound(self,CHAN_AUTO,"eidolon/death.wav",1,ATTN_NONE);
 		self.drawflags(+)MLS_ABSLIGHT;
 		self.abslight=0.5;
-		MonsterQuake(500, self);
+		MonsterQuake(500);
 		self.lockentity.wait=20;
 		self.lockentity.dmg=30;
 	}
@@ -706,7 +706,7 @@ entity watcher;
 					self.velocity='0 0 0';
 					self.movetype=MOVETYPE_NOCLIP;
 					self.flags(+)FL_FLY;
-					MonsterQuake(500, self);
+					MonsterQuake(500);
 					SUB_UseTargets();
 					self.target="";
 					self.lifetime=time+2;

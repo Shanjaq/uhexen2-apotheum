@@ -799,9 +799,9 @@ void() spellfire_cast = {
 		AxeSpikes();
 	}
 
-//	if (self.Lspell == 8) {
-//		W_FireLeapFrog();							
-//	}
+	if (self.Lspell == 8) {
+		W_FireLeapFrog();							
+	}
 
 //	if (self.Lspell == 9) {
 //		balloffire_launch();							
@@ -852,9 +852,9 @@ void() spellfire_cast = {
 		aero_init();
 	}
 	
-//	if (self.Lspell == 21) {
-//		bushbash_touch();
-//	}
+	if (self.Lspell == 21) {
+		bushbash_touch();
+	}
 
 //	if (self.Lspell == 22) {
 //		TelluricRegen();
@@ -876,9 +876,9 @@ void() spellfire_cast = {
 		coldsp_launch();
 	}
 
-//	if (self.Lspell == 27) {
-//		cage_launch();
-//	}
+	if (self.Lspell == 27) {
+		cage_launch();
+	}
 
 	if (self.Lspell == 28) {
 		launch_crushdrop();	

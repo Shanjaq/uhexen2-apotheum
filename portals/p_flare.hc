@@ -89,7 +89,7 @@ void() flare_blast =
 		if ( (found.classname == "player") ) {
 
 			sound (found, CHAN_BODY, "exp3.wav", 1, ATTN_NORM);
-			MonsterQuake(200.0, found);
+			MonsterQuake2(200.0, found);
 
 		}
 		found = find ( found, classname, "player");

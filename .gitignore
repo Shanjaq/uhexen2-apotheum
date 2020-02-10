@@ -2,3 +2,5 @@
 *.bak
 *.exe
 *.h
+*.lno
+*.ini

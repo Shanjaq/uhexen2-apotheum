@@ -87,22 +87,28 @@ weapons.hc
 tripmine.hc		// UQ tripmines
 
 // Peanut ALL NEW CODE
+p_damage.hc
 p_fx.hc
 p_clouds.hc
 p_status.hc
+p_comet.hc
 p_fwave.hc
 p_frog.hc
 p_flare.hc
 p_spire.hc
+p_arcdth.hc
 p_aero.hc
 p_bushbash.hc
 p_coldsp.hc
 p_icage.hc
 p_crushdrop.hc
+p_death.hc
+p_tcloud.hc
 p_dmatter.hc
 p_darkbeam.hc
 p_magicmod.hc
 p_spellfire.hc
+p_precache.hc
 // Peanut End of new code
 
 impulse.hc

@@ -612,7 +612,6 @@ ai_turn
 don't move, but turn towards ideal_yaw
 =============
 */
-/*
 void() ai_turn =
 {
 	if (FindTarget (FALSE))
@@ -620,7 +619,6 @@ void() ai_turn =
 	
 	ChangeYaw ();
 };
-*/
 
 //=============================================================================
 
