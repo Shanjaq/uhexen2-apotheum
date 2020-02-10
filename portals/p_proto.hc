@@ -4,3 +4,4 @@ entity T_RadiusDamageFlat (entity inflictor, entity attacker, float damage, floa
 void bubble_bob();
 void hold(entity holdee);
 void(float richter, entity source) MonsterQuake2;
+vector aim2(entity prm1, float prm2) : 44;

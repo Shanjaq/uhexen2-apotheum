@@ -7,6 +7,7 @@ float RED_PUFF		= 1;
 float GREEN_PUFF	= 2;
 float GREY_PUFF		= 3;
 
+
 void CreateTeleporterBodyEffect (vector org,vector vel,float framelength)
 {
 	starteffect(CE_TELEPORTERBODY, org,vel,framelength);
@@ -522,3 +523,4 @@ void() fx_particle_explosion =
 
 };
 */
+

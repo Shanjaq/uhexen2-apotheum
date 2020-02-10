@@ -74,3 +74,5 @@ void(vector p1, vector p2, entity from, float damage,string type) LightningDamag
 void(entity thingy)unsheep;
 void()PlayerTouch;
 void SmallExplosion (void);
+
+

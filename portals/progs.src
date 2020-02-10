@@ -17,6 +17,7 @@ p_global.hc
 p_entity.hc
 p_constant.hc
 p_proto.hc
+p_math.hc
 // Peanut End of new code
 
 math.hc

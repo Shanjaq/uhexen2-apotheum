@@ -1325,3 +1325,4 @@ void(entity inflictor, entity attacker, float manadamage, entity ignore) T_Radiu
 	}
 };
 */
+
