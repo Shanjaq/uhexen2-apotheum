@@ -5,3 +5,5 @@
 .float spellradiusmod;
 .float halted;
 .float magic_finished;
+.float spawned_extra;
+.float stepy;

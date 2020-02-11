@@ -1,7 +1,7 @@
 void() cloud_think = {
 	local entity nearest;
 
-	if (time < self.splash_time)
+	if (time < self.lifespan)
 	{
 		if (self.type_index == 0)
 		{
@@ -99,7 +99,7 @@ void(vector start, float type) cloud_spawn = {
 	newmis.avelocity_y = random(-32, 32);
 	newmis.velocity = randomv('-20 -20 -8', '20 20 0');
 	newmis.lifetime = random(3, 7);
-	newmis.splash_time = (time + newmis.lifetime);
+	newmis.lifespan = (time + newmis.lifetime);
 	
 	if (self.cloud_style == 0) //thundercloud
 	{
@@ -160,7 +160,7 @@ void() clouds_build =
 	local float i;
 	local vector pos;
 	
-	if (time < self.splash_time)
+	if (time < self.lifespan)
 	{
 		i = 0;
 		pos = (self.origin + (randomv('-250 -250 -64', '250 250 0')*self.spellradiusmod));
@@ -194,7 +194,7 @@ void(entity spawner) clouds_spawner =
 	spawner.movetype = MOVETYPE_NONE;
 	spawner.hull = HULL_POINT;
 	spawner.lifetime = random(14, 19);
-	spawner.splash_time = (time + spawner.lifetime);
+	spawner.lifespan = (time + spawner.lifetime);
 	
 	traceline (self.origin, (self.origin-('0 0 600')) , TRUE , self);
 	spawner.hit_z = trace_endpos_z;

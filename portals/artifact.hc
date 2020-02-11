@@ -12,6 +12,8 @@
 void() SUB_regen;
 void() StartItem;
 void ring_touch(void);
+float(entity forwhom, float themod) spellmod_give;
+void(entity forent, float status_effect) remove_status;
 
 void artifact_touch()
 {
@@ -150,6 +152,31 @@ void artifact_touch()
 		else
 			other.cnt_invincibility += 1;
 	}
+	else if(self.netname == STR_ACCELERATOR)
+	{
+		if (spellmod_give(other, SUPPORT_CASTSPEED))
+			return;
+	}
+	else if(self.netname == STR_PRISM)
+	{
+		if (spellmod_give(other, SUPPORT_MULTI))
+			return;
+	}
+	else if(self.netname == STR_AMPLIFIER)
+	{
+		if (spellmod_give(other, SUPPORT_DAMAGE))
+			return;
+	}
+	else if(self.netname == STR_MAGNIFIER)
+	{
+		if (spellmod_give(other, SUPPORT_RADIUS))
+			return;
+	}
+	else if(self.netname == STR_TRAP)
+	{
+		if (spellmod_give(other, SUPPORT_TRAP))
+			return;
+	}
 	else if(self.classname == "art_sword_and_crown"&&other.team==2)
 	{
 		sound(self,CHAN_AUTO,"crusader/Lghtn2.mdl",1,ATTN_NONE);
@@ -285,6 +312,16 @@ void spawn_artifact (float artifact,float respawnflag)
 		GenerateArtifactModel("models/a_shbost.mdl",STR_SUPERHEALTHBOOST,respawnflag);
 	else if (artifact == ARTIFACT_FLIGHT)
 		GenerateArtifactModel("models/ringft.mdl",STR_FLIGHT,respawnflag);
+	else if (artifact == ARTIFACT_SPELL_ACCELERATOR)
+		GenerateArtifactModel ( "models/a_spellmod.mdl", STR_ACCELERATOR, respawnflag);
+	else if (artifact == ARTIFACT_SPELL_PRISM)
+		GenerateArtifactModel ( "models/a_spellmod.mdl", STR_PRISM, respawnflag);
+	else if (artifact == ARTIFACT_SPELL_AMPLIFIER)
+		GenerateArtifactModel ( "models/a_spellmod.mdl", STR_AMPLIFIER, respawnflag);
+	else if (artifact == ARTIFACT_SPELL_MAGNIFIER)
+		GenerateArtifactModel ( "models/a_spellmod.mdl", STR_MAGNIFIER, respawnflag);
+	else if (artifact == ARTIFACT_SPELL_TRAP)
+		GenerateArtifactModel ( "models/a_spellmod.mdl", STR_TRAP, respawnflag);
 }
 
 
@@ -398,6 +435,9 @@ void use_healthboost()
 		self.flags2(-)FL2_POISONED;
 		centerprint(self,"The poison has been cleansed from your blood...\n");
 	}
+	
+	if (self.status_effects & STATUS_POISON)
+		remove_status(self, STATUS_POISON);
 }
 
 

@@ -88,27 +88,53 @@ weapons.hc
 tripmine.hc		// UQ tripmines
 
 // Peanut ALL NEW CODE
+p_artifact.hc
 p_damage.hc
+p_gametype.hc
 p_fx.hc
 p_clouds.hc
 p_status.hc
+p_pk.hc
+p_shlight.hc
+p_teleport.hc
 p_comet.hc
+p_photonbm.hc
+p_suprnova.hc
 p_fwave.hc
 p_frog.hc
+p_balloffire.hc
+p_inferno.hc
+p_volcano.hc
 p_flare.hc
+p_zap.hc
 p_spire.hc
 p_arcdth.hc
+p_lchain.hc
+p_lslide.hc
+p_storm.hc
+p_razorwind.hc
 p_aero.hc
 p_bushbash.hc
+p_regen.hc
+p_tol.hc
+p_twister.hc
+p_frosty.hc
 p_coldsp.hc
 p_icage.hc
 p_crushdrop.hc
+p_ghail.hc
+p_tsunami.hc
+p_swarm_rats.hc
 p_death.hc
 p_tcloud.hc
 p_dmatter.hc
 p_darkbeam.hc
+p_bh.hc
 p_magicmod.hc
 p_spellfire.hc
+p_money.hc
+p_alarm.hc
+p_shopkeep.hc
 p_precache.hc
 // Peanut End of new code
 
@@ -162,6 +188,10 @@ fangel.hc
 pentacles.hc
 
 eric.hc
+
+// Peanut ALL NEW CODE
+p_multim.hc
+// Peanut End of new code
 
 rider.hc
 pstboar.hc

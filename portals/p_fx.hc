@@ -584,9 +584,9 @@ void  ()splashy = {
 	splash.angles = (self.angles);
 	splash.think = splashz;
 	splash.nextthink = (time + 0.02);
-	//if (self.auraV == 1) {
-	//	self.skin = 5;
-	//}
+	if (self.oldweapon == 1) {
+		self.skin = 5;
+	}
 	if (self.skin == 0) {
 		particle2 ( self.origin, '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', 140.00000, 2, 80.00000);
 		sound ( splash, CHAN_VOICE, "chit1.wav", 1.00000, ATTN_NORM);
@@ -676,6 +676,57 @@ void  ()charge_touch =  {
 	}
 };
 
+void ()ShockShake =
+{
+	local entity head;
+	local float dist, inertia;
+	
+
+	if (time < self.splash_time)
+	{
+		head = findradius ( self.origin, self.mass);
+		while (head)
+		{
+			if (head.classname == "player")
+			{
+				dist = (vlen ( (self.origin - head.origin)) / self.mass);
+				inertia = (head.mass / 10);
+				//head.punchangle_x = (((random() * 10) - 5) * (dist / self.mass));
+				//head.punchangle_y = (((random() * 8) - 4) * (dist / self.mass));
+				//head.punchangle_z = (((random() * 8) - 4) * (dist / self.mass));
+				head.punchangle_x = (((random() * 10) - 5));
+				head.punchangle_y = (((random() * 8) - 4));
+				head.punchangle_z = (((random() * 8) - 4));
+			}
+			
+			head = head.chain;
+		}
+		self.think = ShockShake;
+		thinktime self : 0.1;
+	}
+	else
+	{
+		self.think = SUB_Remove;
+		thinktime self : HX_FRAME_TIME;
+	}
+};
+
+void (float radius, float duration, entity source)ShockWave =
+{
+	newmis = spawn();
+	newmis.owner = self;
+	newmis.solid = SOLID_NOT;
+	newmis.movetype = MOVETYPE_NONE;
+	newmis.classname = "quake";
+	newmis.mass = fabs ( radius);
+	newmis.lifetime = duration;
+	newmis.splash_time = (time + newmis.lifetime);
+	setorigin ( newmis, source.origin);
+	
+	newmis.think = ShockShake;
+	thinktime newmis : HX_FRAME_TIME;
+};
+
 void (float richter, entity source) MonsterQuake2 =
 {
 	newmis=spawn();
@@ -692,4 +743,27 @@ void (float richter, entity source) MonsterQuake2 =
 //FIXME:  Replace explosion with some other quake-start sound
 	sound(newmis,CHAN_AUTO,"weapons/explode.wav",1,ATTN_NORM);
 	sound(newmis,CHAN_AUTO,"fx/quake.wav",1,ATTN_NORM);
+};
+
+void() smoke3d_think = {
+	if (self.frame > 4) {
+		self.frame = 1;
+	} else {
+		self.frame = self.frame + 1;
+	}
+	do_lightning ( self, 3, STREAM_ATTACHED, 1.00000, self.origin, self.origin + '0 0 100', 3.00000, TE_STREAM_LIGHTNING);
+	self.think = smoke3d_think;
+	thinktime self : 0.125000;
+};
+
+void(vector start) smoke3d_spawn = {
+	newmis = spawn();
+	setorigin(newmis, self.origin);
+	setmodel(newmis, "models/ghail.mdl");
+	newmis.solid = SOLID_NOT;
+	newmis.movetype = MOVETYPE_FLYMISSILE;
+	newmis.drawflags (+) (DRF_TRANSLUCENT | MLS_ABSLIGHT);
+	newmis.abslight = 1;
+	newmis.think = smoke3d_think;
+	thinktime newmis : 0.20000;
 };

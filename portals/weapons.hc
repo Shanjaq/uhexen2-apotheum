@@ -8,6 +8,7 @@ void(vector org, vector vel, float damage,entity victim) SpawnPuff;
 
 void() UseInventoryItem;
 void() ImpulseCommands;
+void() frost_launch;
 void() spellmod_install;
 void() spellfire;
 
@@ -911,6 +912,13 @@ float	it, am, fl;
 	break;
 	}
 
+	if (self.sale == 1) {
+		self.choice = self.impulse;
+		//car = ftos(self.choice);
+		// sprint (self, "3\n");
+		return;
+	}
+
 	self.impulse = 0;
 
 	if (!(self.items & fl))
@@ -1076,12 +1084,12 @@ void() W_WeaponFrame =
 	ImpulseCommands ();
 // Peanut
 	if (self.handy == 2) {
-		//if ((self.Lspell == 25) || (self.Lspell == 2)) {
-		//	if ((self.Lspell == 25) && (self.magic_finished < time))
-		//		frost_launch();
-		///}
-		//else
-		//{
+		if ((self.Lspell == 25) || (self.Lspell == 2)) {
+			if ((self.Lspell == 25) && (self.magic_finished < time))
+				frost_launch();
+		}
+		else
+		{
 			if (time >= (self.LfingerC - ((self.spelltop * 0.36250) * ((self.Lsupport & SUPPORT_RADIUS) > 0)))) {
 				if (self.predebt == 0)
 				{
@@ -1097,16 +1105,16 @@ void() W_WeaponFrame =
 					}
 				}
 			}
-		//}
+		}
 	}
 	
 	if (self.handy == 3) {
-		//if ((self.Rspell == 25) || (self.Rspell == 2)) {
-		//	if ((self.Rspell == 25) && (self.magic_finished < time))
-		//		frost_launch();
-		//}
-		//else
-		//{
+		if ((self.Rspell == 25) || (self.Rspell == 2)) {
+			if ((self.Rspell == 25) && (self.magic_finished < time))
+				frost_launch();
+		}
+		else
+		{
 			if (time >= (self.RfingerC - ((self.spelltop * 0.36250) * ((self.Rsupport & SUPPORT_RADIUS) > 0)))) {
 				if (self.predebt == 0)
 				{
@@ -1122,12 +1130,24 @@ void() W_WeaponFrame =
 					}
 				}
 			}
-		//}
+		}
 
 	}
 
 	if (time < self.attack_finished)
+	{
 		return;
+	}
+	
+	if (self.click == 1) {
+		stuffcmd(self,"impulse 61\n");
+	} else {
+		if ( self.button0 ) {
+			
+			W_Attack ( );
+			
+		}
+	}
 
 // check for attack
 	if (self.button0)

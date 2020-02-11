@@ -80,6 +80,12 @@ string STR_ARMORBREASTPLATE;
 string STR_ARMORHELMET;
 string STR_DONOTPOSSESS;
 
+string STR_ACCELERATOR;
+string STR_PRISM;
+string STR_AMPLIFIER;
+string STR_MAGNIFIER;
+string STR_TRAP;
+
 void StringsInit(void)
 {
 	STR_THE					= "The ";
@@ -155,4 +161,9 @@ void StringsInit(void)
 
 	STR_DONOTPOSSESS		= "You do not possess this item.";
 
+	STR_ACCELERATOR			= "Spell Accelerator";
+	STR_PRISM				= "Spell Prism";
+	STR_AMPLIFIER			= "Spell Amplifier";
+	STR_MAGNIFIER			= "Spell Magnifier";
+	STR_TRAP				= "Spell Trap";
 }

@@ -345,7 +345,16 @@ void end_sys_fields;
 		float RfingerC;
 		float predebt;
 		float debt;
+		float money;
+		float sheep;
+		float arrows;
+		float shopping;
+		float sale;
+		float choice;
+		float selection;
 		float inv_spellmods;
+		float tele_dropped;
+		float charsaved;
 // Peanut End of new code
 	};
 /*	struct // Talking heads

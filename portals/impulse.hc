@@ -7,6 +7,7 @@ void player_level_cheat(void);
 void player_experience_cheat(void);
 void Polymorph (entity loser);
 void()sheep_look;
+void (string lastmap)enter_magic_shop;
 //void create_swarm (void);
 
 void wake_sheep ()
@@ -331,10 +332,18 @@ void() ImpulseCommands =
 	float total;
 	string printnum;
 
+	if (self.sale == 0)
+		self.choice = 0;
+
 	if(self.flags2&FL_CHAINED&&self.impulse!=23)
 		return;
 
-	if (self.impulse == 9&&skill<3)
+	if ( ((self.impulse >= 1.00000) && (self.impulse <= 10.00000) && (self.shopping == 1)) )
+	{
+		dprint("BARF32\n");
+		self.selection = self.impulse;
+	}
+	else if (self.impulse == 9&&skill<3)
 		CheatCommand ();
 	else if(self.impulse==177)//Make BBOX model
 		if(self.movechain.model=="models/playrbox.mdl")
@@ -589,6 +598,14 @@ void() ImpulseCommands =
 			search = nextent(search);
 		}
 	}*/
+// Peanut ALL NEW CODE
+	else if (self.impulse == 51)
+	{
+		if (!deathmatch) {
+			//	enter_magic_shop(mapname);
+			magic_shop_portal();
+		}
+	}
 	else if (self.impulse == 54)
 	{
 		test_status(STATUS_PARALYZE);
@@ -695,7 +712,7 @@ void() ImpulseCommands =
 				spells_compute(self);
 			}
 			spell_marker(0, self.Lfinger);
-			/*
+			
 			if ((self.Lspell == 19) || (self.Lspell == 25) || (self.Lspell == 2)) {
 				if (self.Lspell == 19) {
 					self.click = 1;
@@ -709,7 +726,6 @@ void() ImpulseCommands =
 					self.handy = 2;
 				}
 			}
-			*/
 		} else {
 			return;
 		}
@@ -729,7 +745,7 @@ void() ImpulseCommands =
 				spells_compute(self);
 			}
 			spell_marker(1, self.Rfinger);
-			/*
+			
 			if ((self.Rspell == 19) || (self.Rspell == 25) || (self.Rspell == 2)) {
 				if (self.Rspell == 19) {
 					self.click = 1;
@@ -743,7 +759,6 @@ void() ImpulseCommands =
 					light_shell();
 				}
 			}
-			*/
 		} else {
 			return;
 		}
@@ -787,6 +802,7 @@ void() ImpulseCommands =
 			self.handy = 1;
 		}
 	}
+// Peanut End of new code
 	else if (self.impulse >= 100 && self.impulse <= 115)
 	{
 		Inventory_Quick(self.impulse - 99);

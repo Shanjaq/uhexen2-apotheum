@@ -771,29 +771,29 @@ void() spellfire_cast = {
 	self.velocity = '0 0 0';
 
 	
-//	if (self.Lspell == 1) {
-//		launch_pk( );
-//	}
+	if (self.Lspell == 1) {
+		launch_pk( );
+	}
 	
 	//if (self.Lspell == 2) {
 		//shell of light
 	//}
 
-//	if (self.Lspell == 3) {
-//		teleport_spell();
-//	}
+	if (self.Lspell == 3) {
+		teleport_spell();
+	}
 
-//	if (self.Lspell == 4) {
-//		CometFall();
-//	}
+	if (self.Lspell == 4) {
+		CometFall();
+	}
 
-//	if (self.Lspell == 5) {
-//		photon_ball();	
-//	}
+	if (self.Lspell == 5) {
+		photon_ball();	
+	}
 
-//	if (self.Lspell == 6) {
-//		supernova_init();
-//	}
+	if (self.Lspell == 6) {
+		supernova_init();
+	}
 
 	if (self.Lspell == 7) {
 		AxeSpikes();
@@ -803,45 +803,45 @@ void() spellfire_cast = {
 		W_FireLeapFrog();							
 	}
 
-//	if (self.Lspell == 9) {
-//		balloffire_launch();							
-//	}
+	if (self.Lspell == 9) {
+		balloffire_launch();							
+	}
 
-//	if (self.Lspell == 10) {
-//		obj_redM4();							
-//	}
+	if (self.Lspell == 10) {
+		obj_redM4();							
+	}
 
-//	if (self.Lspell == 11) {
-//		volcano_start();							
-//	}
+	if (self.Lspell == 11) {
+		volcano_start();							
+	}
 
 	if (self.Lspell == 12) {
 		flare_drop();							
 	}
 
-//	if (self.Lspell == 13) {
-//		obj_yellowM1();
-//	}
+	if (self.Lspell == 13) {
+		obj_yellowM1();
+	}
 
 	if (self.Lspell == 14) {
 		spire_drop ( );
 	}
 
-//	if (self.Lspell == 15) {
-//		deatharc_launch();
-//	}
+	if (self.Lspell == 15) {
+		deatharc_launch();
+	}
 
-//	if (self.Lspell == 16) {
-//		lchain_launch ( );
-//	}
+	if (self.Lspell == 16) {
+		lchain_launch ( );
+	}
 
-//	if (self.Lspell == 17) {
-//		SlideDrop ( );
-//	}
+	if (self.Lspell == 17) {
+		SlideDrop ( );
+	}
 
-//	if (self.Lspell == 18) {
-//		storm_launch();
-//	}
+	if (self.Lspell == 18) {
+		storm_launch();
+	}
 
 	//	if (self.Lspell == 19) {
 	//		windball_spawn();
@@ -856,17 +856,17 @@ void() spellfire_cast = {
 		bushbash_touch();
 	}
 
-//	if (self.Lspell == 22) {
-//		TelluricRegen();
-//	}
+	if (self.Lspell == 22) {
+		TelluricRegen();
+	}
 
-//	if (self.Lspell == 23) {
-//		launch_tol();	
-//	}
+	if (self.Lspell == 23) {
+		launch_tol();	
+	}
 
-//	if (self.Lspell == 24) {
-//		twister_launch();
-//	}
+	if (self.Lspell == 24) {
+		twister_launch();
+	}
 
 	//	if (self.Lspell == 25) {
 	//		frost_launch();
@@ -884,27 +884,27 @@ void() spellfire_cast = {
 		launch_crushdrop();	
 	}
 
-//	if (self.Lspell == 29) {
-//		LaunchGlacierspawner();
-//	}
+	if (self.Lspell == 29) {
+		LaunchGlacierspawner();
+	}
 
-//	if (self.Lspell == 30) {
+	if (self.Lspell == 30) {
 		//tsunami_launch();
-//		tsunami_test();
-//	}
+		tsunami_test();
+	}
 
-//	if (self.Lspell == 31) {
-//		launch_swarm();
-//	}
+	if (self.Lspell == 31) {
+		launch_swarm();
+	}
 
-//	if (self.Lspell == 32) {
-//		blackdeath_swoop ( );
+	if (self.Lspell == 32) {
+		blackdeath_swoop ( );
 		//blackdeath_launch();
-//	}
+	}
 
-//	if (self.Lspell == 33) {
-//		toxic_cloud();
-//	}
+	if (self.Lspell == 33) {
+		toxic_cloud();
+	}
 
 	if (self.Lspell == 34) {
 		dark_matter_init();
@@ -914,9 +914,9 @@ void() spellfire_cast = {
 		darkbeam();
 	}
 
-//	if (self.Lspell == 36) {
-//		bh_ball_drop();	
-//	}
+	if (self.Lspell == 36) {
+		bh_ball_drop();	
+	}
 	
 	remove ( self);
 };
