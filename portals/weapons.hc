@@ -412,6 +412,103 @@ void W_SetCurrentAmmo (void)
 			break;
 		}
 	break;
+	case IT_WEAPON5:
+		self.weaponmodel="";
+		self.weaponframe = 0;
+
+		switch(self.playerclass)
+		{
+		case CLASS_PALADIN:
+			gauntlet_select();
+			break;
+		case CLASS_CRUSADER:
+			warhammer_select();
+			break;
+		case CLASS_NECROMANCER:
+			sickle_select();
+			break;
+		case CLASS_SUCCUBUS:
+			bloodrain_select();
+			break;
+		default:	//CLASS_ASSASSIN
+			punchdagger_select();
+			break;
+		}
+		break;
+	case IT_WEAPON6:
+		self.weaponmodel="";
+		self.weaponframe = 0;
+	
+		switch(self.playerclass)
+		{
+		case CLASS_PALADIN:
+			vorpal_select();
+			break;
+		case CLASS_CRUSADER:
+			icestaff_select();
+			break;
+		case CLASS_NECROMANCER:
+			if(self.oldweapon!=IT_WEAPON3)
+				magicmis_select();
+			else
+				magicmis_select_from_bone();
+			break;
+		case CLASS_SUCCUBUS:
+			acidorb_select();
+			break;
+		default:	//CLASS_ASSASSIN
+			crossbow_select();
+			break;
+		}
+		break;
+	case IT_WEAPON7:
+		self.weaponmodel="";
+		self.weaponframe = 0;
+		switch(self.playerclass)
+		{
+		case CLASS_PALADIN:
+			axe_select();
+			break;
+		case CLASS_CRUSADER:
+			meteor_select();
+			break;
+		case CLASS_NECROMANCER:
+			if(self.oldweapon!=IT_WEAPON2)
+				boneshard_select();
+			else
+				boneshard_select_from_mmis();
+			break;
+		case CLASS_SUCCUBUS:
+			flameorb_select();
+			break;
+		default:	//CLASS_ASSASSIN
+			grenade_select();
+			break;
+		}
+	break;
+	case IT_WEAPON8:
+		self.weaponmodel="";
+		self.weaponframe = 0;
+
+		switch(self.playerclass)
+		{
+		case CLASS_PALADIN:
+			purifier_select();
+			break;
+		case CLASS_CRUSADER:
+			sunstaff_select();
+			break;
+		case CLASS_NECROMANCER:
+			ravenstaff_select();
+			break;
+		case CLASS_SUCCUBUS:
+			lightning_select();
+			break;
+		default:	//CLASS_ASSASSIN
+			setstaff_select();
+			break;
+		}
+	break;
 	}
 
 //All players will have to do this eventually, to reset
@@ -494,6 +591,33 @@ float W_CheckNoAmmo (float check_weapon)
 			else if(self.bluemana >= 3)
 					return TRUE;
 		break;
+		case IT_WEAPON8:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 30 && self.greenmana >= 30)
+					return TRUE;
+			}
+			else if(self.bluemana >= 1 && self.greenmana >= 1)
+					return TRUE;
+		break;
+		case IT_WEAPON7:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.greenmana >= 12)
+					return TRUE;
+			}
+			else if(self.greenmana >= 3)
+					return TRUE;
+			break;
+		case IT_WEAPON6:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 10)
+					return TRUE;
+			}
+			else if(self.bluemana >= 3)
+					return TRUE;
+		break;
 		}
 	break;
 	case CLASS_SUCCUBUS:
@@ -526,6 +650,33 @@ float W_CheckNoAmmo (float check_weapon)
 			else if(self.bluemana >= 3)
 					return TRUE;
 		break;
+		case IT_WEAPON8:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 2 && self.greenmana >= 2)
+					return TRUE;
+			}
+			else if(self.bluemana >= 6 && self.greenmana >= 6)
+					return TRUE;
+		break;
+		case IT_WEAPON7:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.greenmana >= 10)
+					return TRUE;
+			}
+			else if(self.greenmana >= 4)
+					return TRUE;
+		break;
+		case IT_WEAPON6:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 8)
+					return TRUE;
+			}
+			else if(self.bluemana >= 3)
+					return TRUE;
+		break;
 		}
 	break;
 	case CLASS_CRUSADER:
@@ -546,6 +697,29 @@ float W_CheckNoAmmo (float check_weapon)
 					return TRUE;
 		break;
 		case IT_WEAPON2:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 10)
+					return TRUE;
+			}
+			else if(self.bluemana >= 1)
+					return TRUE;
+		break;
+		case IT_WEAPON8:
+			if(self.bluemana >= 2 && self.greenmana >= 2)
+				return TRUE;
+			self.effects(-)EF_BRIGHTLIGHT;
+		break;
+		case IT_WEAPON7:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.greenmana >= 20)
+					return TRUE;
+			}
+			else if(self.greenmana >= 8)
+					return TRUE;
+		break;
+		case IT_WEAPON6:
 			if(self.artifact_active&ART_TOMEOFPOWER)
 			{
 				if(self.bluemana >= 10)
@@ -586,6 +760,33 @@ float W_CheckNoAmmo (float check_weapon)
 			else if(self.bluemana >= 2)
 					return TRUE;
 		break;
+		case IT_WEAPON8:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 16 && self.greenmana >= 16)
+					return TRUE;
+			}
+			else if(self.bluemana >= 8 && self.greenmana >= 8)
+					return TRUE;
+		break;
+		case IT_WEAPON7:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.greenmana >= 20)
+					return TRUE;
+			}
+			else if(self.greenmana >= 1)
+					return TRUE;
+		break;
+		case IT_WEAPON6:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 10)
+					return TRUE;
+			}
+			else if(self.bluemana >= 2)
+					return TRUE;
+		break;
 		}
 	break;
 	case CLASS_PALADIN:
@@ -610,6 +811,34 @@ float W_CheckNoAmmo (float check_weapon)
 					return TRUE;
 		break;
 		case IT_WEAPON2:
+/*			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 4)
+					return TRUE;
+			}
+			else if(self.bluemana >= 2) 
+					return TRUE;*/
+			return TRUE;
+		break;
+		case IT_WEAPON8:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.bluemana >= 8 && self.greenmana >= 8)
+					return TRUE;
+			}
+			else if(self.bluemana >= 1 && self.greenmana >= 1)
+					return TRUE;
+		break;
+		case IT_WEAPON7:
+			if(self.artifact_active&ART_TOMEOFPOWER)
+			{
+				if(self.greenmana >= 8)
+					return TRUE;
+			}
+			else if(self.greenmana >= 2)
+					return TRUE;
+		break;
+		case IT_WEAPON6:
 /*			if(self.artifact_active&ART_TOMEOFPOWER)
 			{
 				if(self.bluemana >= 4)
@@ -762,6 +991,87 @@ void() W_Attack =
 		break;
 		}
 	break;
+	case IT_WEAPON5:
+		switch (self.playerclass)
+		{
+		case CLASS_PALADIN:
+			pal_gauntlet_fire();
+			break;
+		case CLASS_NECROMANCER:
+			self.th_missile();
+			break;
+		case CLASS_ASSASSIN:
+			Ass_Pdgr_Fire();
+			break;
+		case CLASS_CRUSADER:
+			Cru_Wham_Fire();
+			break;
+		case CLASS_SUCCUBUS:
+			Suc_Blrn_Fire();
+			break;
+		}
+	break;
+	case IT_WEAPON6:
+		switch (self.playerclass)
+		{
+		case CLASS_PALADIN:
+			pal_vorpal_fire();
+		break;
+		case CLASS_ASSASSIN:
+			crossbow_fire();
+		break;
+		case CLASS_SUCCUBUS:
+			Suc_Aorb_Fire();
+		break;
+		case CLASS_CRUSADER:
+			if(self.th_weapon==icestaff_idle)
+				Cru_Ice_Fire();
+		break;
+		case CLASS_NECROMANCER:
+			self.th_missile();
+		break;
+		}
+	break;
+	case IT_WEAPON7:
+		switch (self.playerclass)
+		{
+		case CLASS_PALADIN:
+			pal_axe_fire();
+		break;
+		case CLASS_ASSASSIN:
+			grenade_throw();
+		break;
+		case CLASS_SUCCUBUS:
+			Suc_Forb_Fire();
+		break;
+		case CLASS_CRUSADER:
+			Cru_Met_Attack();
+		break;
+		case CLASS_NECROMANCER:
+			self.th_missile();
+		break;
+		}
+	break;
+	case IT_WEAPON8:
+		switch (self.playerclass)
+		{
+		case CLASS_PALADIN:
+			pal_purifier_fire();
+		break;
+		case CLASS_ASSASSIN:
+			ass_setstaff_fire();
+		break;
+		case CLASS_CRUSADER:
+			Cru_Sun_Fire();
+		break;
+		case CLASS_NECROMANCER:
+			ravenstaff_fire();
+		break;
+		case CLASS_SUCCUBUS:
+			Suc_Litn_Fire();
+		break;
+		}
+	break;
 	}
 };
 
@@ -858,6 +1168,92 @@ void W_DeselectWeapon (void)
 		break;
 		}
 	break;
+	case IT_WEAPON5:
+		switch (self.playerclass)
+		{
+		case CLASS_PALADIN:
+			gauntlet_deselect();
+		break;
+		case CLASS_CRUSADER:
+			warhammer_deselect();
+		break;
+		case CLASS_ASSASSIN:
+			punchdagger_deselect();
+		break;
+		case CLASS_SUCCUBUS:
+			bloodrain_deselect();
+		break;
+		case CLASS_NECROMANCER:
+			sickle_deselect();
+		break;
+		}
+	break;
+	case IT_WEAPON6:
+		switch (self.playerclass)
+		{
+		case CLASS_PALADIN:
+			vorpal_deselect();
+		break;
+		case CLASS_CRUSADER:
+			icestaff_deselect();
+		break;
+		case CLASS_ASSASSIN:
+			crossbow_deselect();
+		break;
+		case CLASS_SUCCUBUS:
+			acidorb_deselect();
+		break;
+		case CLASS_NECROMANCER:
+			if(self.weapon!=IT_WEAPON3)
+				magicmis_deselect();
+			else
+				W_SetCurrentAmmo();
+		break;
+		}
+	break;
+	case IT_WEAPON7:
+		switch (self.playerclass)
+		{
+		case CLASS_PALADIN:
+			axe_deselect();
+		break;
+		case CLASS_CRUSADER:
+			meteor_deselect();
+		break;
+		case CLASS_ASSASSIN:
+			grenade_deselect();
+		break;
+		case CLASS_NECROMANCER:
+			if(self.weapon!=IT_WEAPON2)
+				boneshard_deselect();
+			else
+				W_SetCurrentAmmo();
+		break;
+		case CLASS_SUCCUBUS:
+			flameorb_deselect();
+		break;
+		}
+	break;
+	case IT_WEAPON8:
+		switch (self.playerclass)
+		{
+		case CLASS_PALADIN:
+			purifier_deselect();
+		break;
+		case CLASS_CRUSADER:
+			sunstaff_deselect();
+		break;
+		case CLASS_ASSASSIN:
+			setstaff_deselect();
+		break;
+		case CLASS_NECROMANCER:
+			ravenstaff_deselect();
+		break;
+		case CLASS_SUCCUBUS:
+			lightning_deselect();
+		break;
+		}
+	break;
 	default:
 		W_SetCurrentAmmo();
 	break;
@@ -909,6 +1305,25 @@ float	it, am, fl;
 		fl = IT_WEAPON4;
 		if ((self.bluemana < 1) && (self.greenmana <1))
 			am = 1;
+	break;
+	case 5:
+		fl = IT_WEAPON1;
+	break;
+	case 6:
+		fl = IT_WEAPON2;
+	break;
+	case 7:
+		fl = IT_WEAPON3;
+		if (self.bluemana < 2)
+			am = 1;
+	break;
+	case 8:
+		fl = IT_WEAPON4;
+		if ((self.bluemana < 1) && (self.greenmana <1))
+			am = 1;
+	break;
+	case 9:
+		fl = IT_WEAPON1;
 	break;
 	}
 
@@ -996,6 +1411,18 @@ void() CycleWeaponCommand =
 		case IT_WEAPON4:
 			fl = IT_WEAPON1;
 			break;
+		case IT_WEAPON5:
+			fl = IT_WEAPON6;
+			break;
+		case IT_WEAPON6:
+			fl = IT_WEAPON7;
+			break;
+		case IT_WEAPON7:
+			fl = IT_WEAPON8;
+			break;
+		case IT_WEAPON8:
+			fl = IT_WEAPON5;
+			break;
 		default: /* ouch !!?? */
 			return;/*fl = IT_WEAPON1;*/
 		    break;
@@ -1040,6 +1467,18 @@ void() CycleWeaponReverseCommand =
 			break;
 		case IT_WEAPON4:
 			fl = IT_WEAPON3;
+			break;
+		case IT_WEAPON5:
+			fl = IT_WEAPON8;
+			break;
+		case IT_WEAPON6:
+			fl = IT_WEAPON5;
+			break;
+		case IT_WEAPON7:
+			fl = IT_WEAPON6;
+			break;
+		case IT_WEAPON8:
+			fl = IT_WEAPON7;
 			break;
 		default: /* ouch !!?? */
 			return;/*fl = IT_WEAPON1;*/
@@ -1173,7 +1612,7 @@ void ClassChangeWeapon(void)
 	{
 		switch (self.weapon)
 		{
-		case  IT_WEAPON1:
+		case IT_WEAPON1:
 			self.th_weapon=gauntlet_select;
 			self.weaponmodel = "models/gauntlet.mdl";
 		break;
@@ -1186,6 +1625,22 @@ void ClassChangeWeapon(void)
 			self.weaponmodel = "models/axe.mdl";
 		break;
 		case IT_WEAPON4:
+			self.th_weapon=purifier_select;
+			self.weaponmodel = "models/purifier.mdl";
+		break;
+		case IT_WEAPON5:
+			self.th_weapon=gauntlet_select;
+			self.weaponmodel = "models/gauntlet.mdl";
+		break;
+		case IT_WEAPON6:
+			self.th_weapon=vorpal_select;
+			self.weaponmodel = "models/vorpal.mdl";
+		break;
+		case IT_WEAPON7:
+			self.th_weapon=axe_select;
+			self.weaponmodel = "models/axe.mdl";
+		break;
+		case IT_WEAPON8:
 			self.th_weapon=purifier_select;
 			self.weaponmodel = "models/purifier.mdl";
 		break;
@@ -1211,6 +1666,22 @@ void ClassChangeWeapon(void)
 			self.th_weapon=sunstaff_select;
 			self.weaponmodel = "models/sunstaff.mdl";
 		break;
+		case IT_WEAPON5:
+			self.th_weapon=warhammer_select;
+			self.weaponmodel = "models/warhamer.mdl";
+		break;
+		case IT_WEAPON6:
+			self.th_weapon=icestaff_select;
+			self.weaponmodel = "models/icestaff.mdl";
+		break;
+		case IT_WEAPON7:
+			self.th_weapon=meteor_select;
+			self.weaponmodel = "models/meteor.mdl";
+		break;
+		case IT_WEAPON8:
+			self.th_weapon=sunstaff_select;
+			self.weaponmodel = "models/sunstaff.mdl";
+		break;
 		}
 	}
 	else if (self.playerclass==CLASS_NECROMANCER)
@@ -1230,6 +1701,22 @@ void ClassChangeWeapon(void)
 			self.weaponmodel = "models/spllbook.mdl";
 		break;
 		case IT_WEAPON4:
+			self.th_weapon=ravenstaff_select;
+			self.weaponmodel = "models/ravenstf.mdl";
+		break;
+		case IT_WEAPON5:
+			self.th_weapon=sickle_select;
+			self.weaponmodel = "models/sickle.mdl";
+		break;
+		case IT_WEAPON6:
+			self.th_weapon=sickle_select;
+			self.weaponmodel = "models/spllbook.mdl";  // FIXME: still need these models
+		break;
+		case IT_WEAPON7:
+			self.th_weapon=sickle_select;
+			self.weaponmodel = "models/spllbook.mdl";
+		break;
+		case IT_WEAPON8:
 			self.th_weapon=ravenstaff_select;
 			self.weaponmodel = "models/ravenstf.mdl";
 		break;
@@ -1255,6 +1742,22 @@ void ClassChangeWeapon(void)
 			self.th_weapon=setstaff_select;
 			self.weaponmodel = "models/scarabst.mdl";
 		break;
+		case IT_WEAPON5:
+			self.th_weapon=punchdagger_select;
+			self.weaponmodel = "models/punchdgr.mdl";
+		break;
+		case IT_WEAPON6:
+			self.th_weapon=crossbow_select;
+			self.weaponmodel = "models/crossbow.mdl";
+		break;
+		case IT_WEAPON7:
+			self.th_weapon=grenade_select;
+			self.weaponmodel = "models/v_assgr.mdl";
+		break;
+		case IT_WEAPON8:
+			self.th_weapon=setstaff_select;
+			self.weaponmodel = "models/scarabst.mdl";
+		break;
 		}
 	}
 	else if (self.playerclass==CLASS_SUCCUBUS)
@@ -1274,6 +1777,22 @@ void ClassChangeWeapon(void)
 			self.weaponmodel = "models/sucwp3.mdl";
 		break;
 		case IT_WEAPON4:
+			self.th_weapon=lightning_select;
+			self.weaponmodel = "models/sucwp4.mdl";
+		break;
+		case IT_WEAPON5:
+			self.th_weapon=bloodrain_select;
+			self.weaponmodel = "models/sucwp1.mdl";
+		break;
+		case IT_WEAPON6:
+			self.th_weapon=acidorb_select;
+			self.weaponmodel = "models/sucwp2.mdl";
+		break;
+		case IT_WEAPON7:
+			self.th_weapon=flameorb_select;
+			self.weaponmodel = "models/sucwp3.mdl";
+		break;
+		case IT_WEAPON8:
 			self.th_weapon=lightning_select;
 			self.weaponmodel = "models/sucwp4.mdl";
 		break;

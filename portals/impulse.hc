@@ -46,7 +46,7 @@ void restore_weapon ()
 	{
 		switch (self.weapon)
 		{
-		case  IT_WEAPON1:
+		case IT_WEAPON1:
 			self.weaponmodel = "models/gauntlet.mdl";
 		break;
 		case IT_WEAPON2:
@@ -56,6 +56,18 @@ void restore_weapon ()
 			self.weaponmodel = "models/axe.mdl";
 		break;
 		case IT_WEAPON4:
+			self.weaponmodel = "models/purifier.mdl";
+		break;
+		case IT_WEAPON5:
+			self.weaponmodel = "models/gauntlet.mdl";
+		break;
+		case IT_WEAPON6:
+			self.weaponmodel = "models/vorpal.mdl";
+		break;
+		case IT_WEAPON7:
+			self.weaponmodel = "models/axe.mdl";
+		break;
+		case IT_WEAPON8:
 			self.weaponmodel = "models/purifier.mdl";
 		break;
 		}
@@ -76,6 +88,18 @@ void restore_weapon ()
 		case IT_WEAPON4:
 			self.weaponmodel = "models/sunstaff.mdl";
 		break;
+		case IT_WEAPON5:
+			self.weaponmodel = "models/warhamer.mdl";
+		break;
+		case IT_WEAPON6:
+			self.weaponmodel = "models/icestaff.mdl";
+		break;
+		case IT_WEAPON7:
+			self.weaponmodel = "models/meteor.mdl";
+		break;
+		case IT_WEAPON8:
+			self.weaponmodel = "models/sunstaff.mdl";
+		break;
 		}
 	}
 	else if (self.playerclass==CLASS_NECROMANCER)
@@ -92,6 +116,18 @@ void restore_weapon ()
 			self.weaponmodel = "models/spllbook.mdl";
 		break;
 		case IT_WEAPON4:
+			self.weaponmodel = "models/ravenstf.mdl";
+		break;
+		case IT_WEAPON5:
+			self.weaponmodel = "models/sickle.mdl";
+		break;
+		case IT_WEAPON6:
+			self.weaponmodel = "models/spllbook.mdl";  // FIXME: still need these models
+		break;
+		case IT_WEAPON7:
+			self.weaponmodel = "models/spllbook.mdl";
+		break;
+		case IT_WEAPON8:
 			self.weaponmodel = "models/ravenstf.mdl";
 		break;
 		}
@@ -112,6 +148,18 @@ void restore_weapon ()
 		case IT_WEAPON4:
 			self.weaponmodel = "models/scarabst.mdl";
 		break;
+		case IT_WEAPON5:
+			self.weaponmodel = "models/punchdgr.mdl";
+		break;
+		case IT_WEAPON6:
+			self.weaponmodel = "models/crossbow.mdl";
+		break;
+		case IT_WEAPON7:
+			self.weaponmodel = "models/v_assgr.mdl";
+		break;
+		case IT_WEAPON8:
+			self.weaponmodel = "models/scarabst.mdl";
+		break;
 		}
 	}
 	else if (self.playerclass==CLASS_SUCCUBUS)
@@ -128,6 +176,18 @@ void restore_weapon ()
 			self.weaponmodel = "models/sucwp3.mdl";
 		break;
 		case IT_WEAPON4:
+			self.weaponmodel = "models/sucwp4.mdl";
+		break;
+		case IT_WEAPON5:
+			self.weaponmodel = "models/sucwp1.mdl";
+		break;
+		case IT_WEAPON6:
+			self.weaponmodel = "models/sucwp2.mdl";
+		break;
+		case IT_WEAPON7:
+			self.weaponmodel = "models/sucwp3.mdl";
+		break;
+		case IT_WEAPON8:
 			self.weaponmodel = "models/sucwp4.mdl";
 		break;
 		}
@@ -930,7 +990,7 @@ void() ImpulseCommands =
 */
 	switch (self.impulse)
 	{
-	case 1..4:
+	case 1..8:
 		W_ChangeWeapon();
 	break;
 	case 10:
