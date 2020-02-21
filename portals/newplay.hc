@@ -521,11 +521,11 @@ void Pal_Change_Weapon (void)
 	else if(self.weapon==IT_WEAPON3)
 		self.th_missile=pal_axe_fire;
 	else if(self.weapon==IT_WEAPON4)
-		self.th_missile=pal_gauntlet_fire;
+		self.th_missile=pal_purifier_fire;
 	else if(self.weapon==IT_WEAPON5)
 		self.th_missile=pal_gauntlet_fire;
 	else if(self.weapon==IT_WEAPON6)
-		self.th_missile=pal_purifier_fire;
+		self.th_missile=pal_gauntlet_fire;
 	else
 		self.th_missile=pal_gauntlet_fire;
 }
@@ -539,11 +539,11 @@ void Cru_Change_Weapon (void)
 	else if(self.weapon==IT_WEAPON3)
 		self.th_missile=Cru_Met_Attack;
 	else if(self.weapon==IT_WEAPON4)
-		self.th_missile=Cru_Wham_Fire;
+		self.th_missile=Cru_Sun_Fire;
 	else if(self.weapon==IT_WEAPON5)
 		self.th_missile=Cru_Wham_Fire;
 	else if(self.weapon==IT_WEAPON6)
-		self.th_missile=Cru_Sun_Fire;
+		self.th_missile=Cru_Wham_Fire;
 	else
 		self.th_missile=Cru_Wham_Fire;
 
@@ -558,11 +558,11 @@ void Nec_Change_Weapon (void)
 	else if(self.weapon==IT_WEAPON3)
 		self.th_missile=Nec_Bon_Attack;
 	else if(self.weapon==IT_WEAPON4)
-		self.th_missile=sickle_decide_attack;
+		self.th_missile=setstaff_decide_attack;
 	else if(self.weapon==IT_WEAPON5)
 		self.th_missile=sickle_decide_attack;
 	else if(self.weapon==IT_WEAPON6)
-		self.th_missile=setstaff_decide_attack;
+		self.th_missile=sickle_decide_attack;
 	else
 		self.th_missile=sickle_decide_attack;
 }
@@ -576,11 +576,11 @@ void Ass_Change_Weapon (void)
 	else if(self.weapon==IT_WEAPON3)
 		self.th_missile=grenade_throw;
 	else if(self.weapon==IT_WEAPON4)
-		self.th_missile=Ass_Pdgr_Fire;
+		self.th_missile=ass_setstaff_fire;
 	else if(self.weapon==IT_WEAPON5)
 		self.th_missile=Ass_Pdgr_Fire;
 	else if(self.weapon==IT_WEAPON6)
-		self.th_missile=ass_setstaff_fire;
+		self.th_missile=Ass_Pdgr_Fire;
 	else
 		self.th_missile=Ass_Pdgr_Fire;
 }
@@ -594,13 +594,13 @@ void Suc_Change_Weapon (void)
 	else if(self.weapon==IT_WEAPON3)
 		self.th_missile=Suc_Forb_Fire;
 	else if(self.weapon==IT_WEAPON4)
-		self.th_missile=Suc_Blrn_Fire;
+		self.th_missile=Suc_Litn_Fire;
 	else if(self.weapon==IT_WEAPON5)
 		self.th_missile=Suc_Blrn_Fire;
 	else if(self.weapon==IT_WEAPON6)
-		self.th_missile=Suc_Litn_Fire;
+		self.th_missile=Suc_Blrn_Fire;
 	else
-		self.th_missile=Suc_Litn_Fire;
+		self.th_missile=Suc_Blrn_Fire;
 }
 
 float player_start_frames[200] =

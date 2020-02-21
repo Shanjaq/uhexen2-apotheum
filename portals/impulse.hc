@@ -56,13 +56,13 @@ void restore_weapon ()
 			self.weaponmodel = "models/axe.mdl";
 		break;
 		case IT_WEAPON4:
-			self.weaponmodel = "models/gauntlet.mdl";
+			self.weaponmodel = "models/purifier.mdl";
 		break;
 		case IT_WEAPON5:
 			self.weaponmodel = "models/gauntlet.mdl";
 		break;
 		case IT_WEAPON6:
-			self.weaponmodel = "models/purifier.mdl";
+			self.weaponmodel = "models/gauntlet.mdl";
 		break;
 		}
 	}
@@ -80,13 +80,13 @@ void restore_weapon ()
 			self.weaponmodel = "models/meteor.mdl";
 		break;
 		case IT_WEAPON4:
-			self.weaponmodel = "models/warhamer.mdl";
+			self.weaponmodel = "models/sunstaff.mdl";
 		break;
 		case IT_WEAPON5:
 			self.weaponmodel = "models/warhamer.mdl";
 		break;
 		case IT_WEAPON6:
-			self.weaponmodel = "models/sunstaff.mdl";
+			self.weaponmodel = "models/warhamer.mdl";
 		break;
 		}
 	}
@@ -104,13 +104,13 @@ void restore_weapon ()
 			self.weaponmodel = "models/spllbook.mdl";
 		break;
 		case IT_WEAPON4:
-			self.weaponmodel = "models/sickle.mdl";
+			self.weaponmodel = "models/ravenstf.mdl";
 		break;
 		case IT_WEAPON5:
 			self.weaponmodel = "models/sickle.mdl";
 		break;
 		case IT_WEAPON6:
-			self.weaponmodel = "models/ravenstf.mdl";
+			self.weaponmodel = "models/sickle.mdl";
 		break;
 		}
 	}
@@ -128,13 +128,13 @@ void restore_weapon ()
 			self.weaponmodel = "models/v_assgr.mdl";
 		break;
 		case IT_WEAPON4:
-			self.weaponmodel = "models/punchdgr.mdl";
+			self.weaponmodel = "models/scarabst.mdl";
 		break;
 		case IT_WEAPON5:
 			self.weaponmodel = "models/punchdgr.mdl";
 		break;
 		case IT_WEAPON6:
-			self.weaponmodel = "models/scarabst.mdl";
+			self.weaponmodel = "models/punchdgr.mdl";
 		break;
 		}
 	}
@@ -152,13 +152,13 @@ void restore_weapon ()
 			self.weaponmodel = "models/sucwp3.mdl";
 		break;
 		case IT_WEAPON4:
-			self.weaponmodel = "models/sucwp1.mdl";
+			self.weaponmodel = "models/sucwp4.mdl";
 		break;
 		case IT_WEAPON5:
 			self.weaponmodel = "models/sucwp1.mdl";
 		break;
 		case IT_WEAPON6:
-			self.weaponmodel = "models/sucwp4.mdl";
+			self.weaponmodel = "models/sucwp1.mdl";
 		break;
 		}
 	}
