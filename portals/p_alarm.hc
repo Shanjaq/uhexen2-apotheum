@@ -22,6 +22,7 @@ void ()item_spawner2_think = {
 			oldself = self;
 			self = newmis;
 			GenerateArtifactModel(oldself.model, oldself.netname, NO_RESPAWN);
+			self.inventory = oldself.inventory;
 			self = oldself;
 			
 			newmis.skin = self.skin;
@@ -47,6 +48,7 @@ void(entity item) item_spawnify =
 	spawner.solid = SOLID_NOT;
 	spawner.movetype = MOVETYPE_NONE;
 	spawner.effects = EF_NODRAW;
+	spawner.inventory = item.inventory;
 	spawner.think = item_spawner2_think;
 	thinktime spawner : 3.00000;
 };

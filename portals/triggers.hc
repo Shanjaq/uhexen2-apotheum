@@ -1563,6 +1563,9 @@ void trigger_push_gone (void)
 
 void() trigger_push_touch =
 {
+	if((mapname == "peanutshop") && (self.inactive))
+		return;
+	
 	if(world.spawnflags&MISSIONPACK)
 	{
 		if(self.inactive)

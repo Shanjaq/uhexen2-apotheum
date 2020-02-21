@@ -1054,6 +1054,11 @@ entity spot;
 
 	spot = SelectSpawnPoint ();
 	setorigin(self, spot.origin + '0 0 1');
+	if (self.blizzcount == 1) {
+		setorigin(self, (self.pos2 + '0.00000 0.00000 1.00000'));
+		sprint(self, vtos(self.pos2));
+		self.blizzcount = 0;
+	}
 	self.angles = spot.angles;
 	self.fixangle = TRUE;		// turn this way immediately
 
@@ -1074,6 +1079,10 @@ entity spot;
 	W_SetCurrentAmmo ();
 
 	force_retouch = 2;		// make sure even still objects get hit
+	
+	if ( (world.model == "maps/peanutshop.bsp") ) {
+		stuffcmd(self, "bgmvolume 0.45\nmusic bassdemo\n");
+	}
 
 	self.think=player_frames;
 	thinktime self : 0;

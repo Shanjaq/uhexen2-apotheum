@@ -27,7 +27,7 @@ float(entity forwhom, float themod) spellmod_give =
 		{
 			tracker.inv_spellmods += fexp(themod, 2);
 			tracker.debt += 1500;
-			tracker.owner.debt += 1500;
+			//tracker.owner.debt += 1500;
 			return 0;
 		}
 		else

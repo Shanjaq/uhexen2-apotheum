@@ -1023,6 +1023,10 @@ void  DropInventoryItem (void)
 		makevectors(self.v_angle);
 		setorigin(item,self.origin + self.proj_ofs + v_up * 10 + v_forward * 40 + v_right * 8);
 		
+		if (holdent.predebt == 1) {
+			holdent.debt -= item_value[holdent.inventory];
+		}
+
 		sound(self,CHAN_BODY,"misc/whoosh.wav",1,ATTN_NORM);
 		if(torch_thrown)
 			throw_torch(item);

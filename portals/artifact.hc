@@ -185,6 +185,10 @@ void artifact_touch()
 		bprint(" has captured the Crown!\n");
 	}
 
+	if (other.predebt == 1) {
+		other.debt += item_value[self.inventory];
+	}
+
 	amount = random();
 	if (amount < 0.5)
 	{
@@ -322,6 +326,8 @@ void spawn_artifact (float artifact,float respawnflag)
 		GenerateArtifactModel ( "models/a_spellmod.mdl", STR_MAGNIFIER, respawnflag);
 	else if (artifact == ARTIFACT_SPELL_TRAP)
 		GenerateArtifactModel ( "models/a_spellmod.mdl", STR_TRAP, respawnflag);
+	
+	self.inventory = artifact;
 }
 
 

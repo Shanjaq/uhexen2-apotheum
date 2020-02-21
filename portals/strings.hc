@@ -80,6 +80,7 @@ string STR_ARMORBREASTPLATE;
 string STR_ARMORHELMET;
 string STR_DONOTPOSSESS;
 
+string STR_YELLOWMANA;
 string STR_ACCELERATOR;
 string STR_PRISM;
 string STR_AMPLIFIER;
@@ -161,6 +162,7 @@ void StringsInit(void)
 
 	STR_DONOTPOSSESS		= "You do not possess this item.";
 
+	STR_YELLOWMANA			= "Yellow Mana";
 	STR_ACCELERATOR			= "Spell Accelerator";
 	STR_PRISM				= "Spell Prism";
 	STR_AMPLIFIER			= "Spell Amplifier";

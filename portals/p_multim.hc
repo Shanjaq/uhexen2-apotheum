@@ -230,12 +230,14 @@ void ()spawn_refresh = {
 					sound ( self, CHAN_AUTO, "skullwiz/push.wav", 1.00000, ATTN_NORM);
 					newmis = spawn();
 					//newmis.flags2 (+) FL_SUMMONED;
+					newmis.flags2 (+) FL2_RESPAWN;
 					setorigin(newmis, pos);
 					newmis.spawned_extra = self.spawned_extra;
 					newmis.skin = result.skin;
 					newmis.health = result.health;
 					newmis.classname = result.classname;
 					thinktime newmis : 0.1;
+					dprint("BARF12\n");
 					if (newmis.classname == "monster_imp_ice") {
 						newmis.think = monster_imp_ice;
 					} else if (newmis.classname == "monster_imp_fire") {

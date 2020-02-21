@@ -7,6 +7,16 @@ float STATUS_PARALYZE = 16;
 float TE_LIGHT_PULSE   =  33.00000;
 float MAX_LIQUID_COUNT = 64.00000;
 
+float item_value[21] = { 0,
+	10, 15, 60,
+	50, 40, 55,
+	60, 35, 25,
+	25, 10, 40,
+	80, 50, 99,
+	1500, 1500, 1500,
+	1500, 1500
+};
+
 float cast_time[37] = { 0,
 	1.5, 2, 3, 4, 5, 7,
 	1.2, 2, 2.5, 5, 5, 7,
