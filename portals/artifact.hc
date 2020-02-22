@@ -582,8 +582,12 @@ void art_blastradius()
 
 void UseManaBoost()
 {
+	if ((self.bluemana == self.max_mana) && (self.greenmana == self.max_mana) && (self.elemana == self.max_mana))
+	return;
+	sound ( self, CHAN_BODY, "misc/whoosh.wav", 1.00000, ATTN_NORM);	
 	self.bluemana  = self.max_mana;
 	self.greenmana = self.max_mana;
+	self.elemana = self.max_mana;
 
 	self.cnt_mana_boost -= 1;
 }

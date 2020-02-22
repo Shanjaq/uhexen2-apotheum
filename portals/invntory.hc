@@ -639,7 +639,7 @@ void BreakChains()
 void UseInventoryItem (void)
 {
 
-	if (self.health <= 0)
+	if ((self.health <= 0) || (self.predebt == 1))
 		return;
 
 	if(self.flags2&FL_CHAINED&&self.inventory!=INV_TELEPORT&&self.inventory!=INV_BLAST)
