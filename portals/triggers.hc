@@ -1297,7 +1297,7 @@ float poof_speed;
 	if (!other.health&&other.size!='0 0 0')
 	{//Exclude projectiles!
 		other.origin = t.origin;
-		if(!t.spawnflags&1&&self.netname != "teleportcoin")	//In case you don't want to push them in a certain dir
+		if ((!t.spawnflags&1&&self.netname != "teleportcoin") && !(self.spawnflags & SILENT))	//In case you don't want to push them in a certain dir
 			other.velocity = (v_forward * other.velocity_x) + (v_forward * other.velocity_y);
 		return;
 	}
@@ -1305,7 +1305,7 @@ float poof_speed;
 	if((t.spawnflags&2||self.spawnflags&16)&&other.classname=="player")
 		other.velocity='0 0 0';//Kill all player's velocity
 
-	if (!self.spawnflags & SILENT)
+	if ((!self.spawnflags & SILENT) || (mapname == "peanutshop"))
 		setorigin (other, t.origin);
 	else
 		setorigin (other, t.origin - '0 0 27');
@@ -1339,7 +1339,8 @@ float poof_speed;
 				else
 					poof_speed = vlen(other.velocity);
 			}
-			other.velocity = v_forward * poof_speed;
+			if (mapname != "peanutshop")
+				other.velocity = v_forward * poof_speed;
 		}
 	}
 

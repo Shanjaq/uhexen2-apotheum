@@ -328,7 +328,7 @@ void end_sys_fields;
 		float handy;
 		float modding;
 		float trap_count;
-		float fingery;
+		float menu_time;
 		float Lfinger;
 		float Rfinger;
 		float Lspell;

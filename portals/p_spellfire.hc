@@ -119,7 +119,7 @@ void ()spell_mana_marker_think =
 			self.effects (+) EF_NODRAW;
 	}
 
-	//if (self.owner.dest_z < time) {
+	//if (self.owner.menu_time < time) {
 	if (self.owner.handy >= 2)
 	{
 		if (time > self.splash_time) {
@@ -128,7 +128,7 @@ void ()spell_mana_marker_think =
 	}
 	else
 	{
-		if (self.owner.dest_z < time) {
+		if (self.owner.menu_time < time) {
 			remove(self);
 		}
 	}
@@ -195,7 +195,7 @@ void ()spell_status_marker_think = {
 	slot_angle_x *= -1;
 	
 
-	if (self.owner.dest_x == 0)
+	if ((self.owner.handy == 0) || (self.owner.handy == 2))
 	{
 		if ((spell_support[self.owner.Lspell]) & fexp(2, self.count))
 			self.skin = self.count;
@@ -210,7 +210,7 @@ void ()spell_status_marker_think = {
 		else if (!(self.owner.Lsupport & fexp(2, self.count)) && !(self.drawflags & DRF_TRANSLUCENT))
 			self.drawflags (+) DRF_TRANSLUCENT;
 	}
-	else if (self.owner.dest_x == 1)
+	else if ((self.owner.handy == 1) || (self.owner.handy == 3))
 	{
 		if ((spell_support[self.owner.Rspell]) & fexp(2, self.count))
 			self.skin = self.count;
@@ -226,7 +226,7 @@ void ()spell_status_marker_think = {
 			self.drawflags (+) DRF_TRANSLUCENT;
 	}
 
-	if (self.owner.dest_z < time) {
+	if (self.owner.menu_time < time) {
 		//self.owner.menuhand = 0;
 		remove(self);
 	}
@@ -400,7 +400,7 @@ void ()charge_beacon_think = {
 	}
 	else
 	{
-		if (self.owner.dest_z < time) {
+		if (self.owner.menu_time < time) {
 			remove(self);
 		}
 	}
@@ -438,6 +438,7 @@ void ()charge_beacon = {
 
 
 void ()spell_marker_think = {
+	local float thehand;
 
 	makevectors (self.owner.v_angle);
 	traceline ((self.owner.origin + self.owner.proj_ofs), ((self.owner.origin + self.owner.proj_ofs)+(v_forward * 55)) , FALSE , self.owner);
@@ -446,7 +447,8 @@ void ()spell_marker_think = {
 	self.velocity = self.owner.velocity;
 	self.skin = 6;
 
-	if (self.owner.dest_x == 0) {
+	if ((self.owner.handy == 0) || (self.owner.handy == 2)) {
+		thehand = 0;
 		self.angles_z = (self.angles_z + (self.count * 20));
 		setorigin (self, (trace_endpos - (v_right * 15)));
 		if ((self.owner.Lfinger1S > 0) && (self.count == 0))
@@ -465,7 +467,8 @@ void ()spell_marker_think = {
 			self.skin = (((self.owner.Lfinger5S - 1) - fmod((self.owner.Lfinger5S - 1), 6)) / 6);
 
 	}
-	if (self.owner.dest_x == 1) {
+	if ((self.owner.handy == 1) || (self.owner.handy == 3)) {
+		thehand = 1;
 		self.angles_z = (self.angles_z - (self.count * 20));
 		setorigin (self, (trace_endpos + (v_right * 15)));
 		if ((self.owner.Rfinger1S > 0) && (self.count == 0))
@@ -484,7 +487,7 @@ void ()spell_marker_think = {
 			self.skin = (((self.owner.Rfinger5S - 1) - fmod((self.owner.Rfinger5S - 1), 6)) / 6);
 	}
 
-	if (self.owner.dest_y == self.count) {
+	if (((thehand == 0) && (self.owner.Lfinger == self.count)) || ((thehand == 1) && (self.owner.Rfinger == self.count))) {
 		if (self.drawflags (+) DRF_TRANSLUCENT)
 		self.drawflags (-) DRF_TRANSLUCENT;
 	} else {
@@ -493,7 +496,7 @@ void ()spell_marker_think = {
 	}
 
 
-	if (self.owner.dest_z < time) {
+	if (self.owner.menu_time < time) {
 		self.owner.menuhand = 0;
 		remove(self);
 	}
@@ -508,9 +511,7 @@ void ()spell_marker_think = {
 void (float thehand, float thefinger)spell_marker = {
 	local float i = 0;
 
-	self.dest_x = thehand;
-	self.dest_y = thefinger;
-	self.dest_z = time + 5;
+	self.menu_time = time + 5;
 
 	if (self.menuhand == 0) {
 		self.menuhand = (thehand + 1);
@@ -1177,7 +1178,7 @@ void() spellfire = {
 	
 	if (self.classname == "player")
 	{
-		self.dest_z = time;
+		self.menu_time = time;
 		//if (self.elemana < self.spellcost) {
 		//dprintf("charge: %s\n", (self.spellcost - ((self.spellcost * ((scharge - time) / self.spelltop))) * ((support & SUPPORT_RADIUS) > 0) * (time < scharge)));
 		if (self.elemana < (self.spellcost - ((self.spellcost * ((scharge - time) / self.spelltop))) * ((support & SUPPORT_RADIUS) > 0) * (time < scharge)) )

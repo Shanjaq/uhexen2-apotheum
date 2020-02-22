@@ -734,7 +734,7 @@ void() ImpulseCommands =
 	else if (self.impulse == 59)
 	{
 		if (self.mage == 1) {
-			if ((self.handy == 0) && (time < self.dest_z))
+			if ((self.handy == 0) && (time < self.menu_time))
 			{
 				self.handy = 2;
 				if ((self.Lsupport & SUPPORT_RADIUS) && (time > (self.LfingerC - ((self.spelltop * 0.36250)))))
@@ -767,7 +767,7 @@ void() ImpulseCommands =
 	else if (self.impulse == 60)
 	{
 		if (self.mage == 1) {
-			if ((self.handy == 1) && (time < self.dest_z))
+			if ((self.handy == 1) && (time < self.menu_time))
 			{
 				self.handy = 3; 
 				if ((self.Rsupport & SUPPORT_RADIUS) && (time > (self.RfingerC - ((self.spelltop * 0.36250)))))
