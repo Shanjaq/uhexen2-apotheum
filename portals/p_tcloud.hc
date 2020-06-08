@@ -18,8 +18,7 @@ void() toxic_cloud_part_think =
 			particle2 ( (trace_endpos + randomv('-64 -64 -24', '64 64 8')), '-30.00000 30.00000 -96.00000', '30.00000 30.00000 128.00000', random(185, 191), 0, 1.00000);
 			if (random() < 0.08)
 			{
-				//liquid_drop(trace_endpos);
-				liquid_drop();
+				liquid_bubble(trace_endpos);
 				if (trace_ent.takedamage & DAMAGE_YES)
 					T_Damage ( trace_ent, self, self.owner, (self.spelldamage + random(self.spelldamage*(-0.12500), self.spelldamage*0.12500)) );
 				

@@ -19,7 +19,7 @@ void () ChunkShrink =
 		self.drawflags (-) DRF_TRANSLUCENT;
 	}
 	if (self.scale < 0.1) {
-		if ((self.classname == "blackhole") || (self.classname == "basher") || (self.classname == "flame") || (self.classname == "slimespot"))
+		if ((self.classname == "blackhole") || (self.classname == "basher") || (self.classname == "flame") || (self.classname == "liquid_chunk"))
 			remove(self);
 		else
 			ChunkRemove();
@@ -269,6 +269,7 @@ void() liquid_drop = {
 
 		drop = spawn_temp();
 		drop.spelldamage = self.spelldamage;
+		drop.spellradiusmod = self.spellradiusmod;
 		drop.ltime = time;
 		drop.owner = self.owner;
 		drop.frame = 0;
@@ -290,10 +291,12 @@ void() liquid_drop = {
 		drop.touch = liquid_drop_timer;
 		drop.drawflags = MLS_ABSLIGHT;
 		drop.abslight = 1.50000;
-		drop.skin = 1;
 
 		// set drop duration
 		setmodel (drop, "models/bloodspot.mdl");
+		if (self.status_effects & STATUS_TOXIC)
+			drop.skin = 2;
+
 		drop.scale = (0.5 + random(2));
 		setsize (drop, '0 0 0', '0 0 0');
 		drop.angles = randomv('0.00000 -180.00000 0.00000','0.00000 180.00000 0.00000');
@@ -327,6 +330,38 @@ void() liquid_drop = {
 	}
 };
 
+void(vector pos) liquid_bubble = {
+	local entity chunk, found;
+	
+	chunk = spawn_temp();
+	chunk.spelldamage = self.spelldamage;
+	chunk.spellradiusmod = self.spellradiusmod;
+	chunk.ltime = time;
+	chunk.owner = self.owner;
+	chunk.lifetime = random(3.00000, 5.00000);
+	chunk.splash_time = time + chunk.lifetime;
+	chunk.classname = "liquid_chunk";
+	chunk.movetype = MOVETYPE_NOCLIP;
+	chunk.solid = SOLID_NOT;
+	//chunk.cnt = (1 + random(3));
+	chunk.think = liquid_drop_timer;
+	thinktime chunk : HX_FRAME_TIME;
+
+	setmodel (chunk, "models/bloodspot.mdl");
+	chunk.skin = 2;
+	chunk.scale = (0.25000 + random(1.62500));
+	setsize (chunk, '0 0 0', '0 0 0');
+	setorigin (chunk, pos);
+	chunk.angles = randomv('0.00000 -180.00000 0.00000','0.00000 180.00000 0.00000');
+	
+	found = T_RadiusDamageFlat (chunk, chunk.owner, (chunk.spelldamage + random(chunk.spelldamage*(-0.12500), chunk.spelldamage*0.12500))*0.12500, 128.00000, chunk.owner, 2);
+	while (found)
+	{
+		apply_status(found, STATUS_TOXIC, (self.spelldamage * 0.12500), random(7, 11));
+		found = found.chain2;
+	}
+};
+
 void() liquid_fly = {
 	if (self.cnt>0) {
 		self.cnt -= 1;
@@ -355,41 +390,6 @@ void(float amount, float radius, float force) liquid_spray = {
 	thinktime missile : HX_FRAME_TIME;
 	missile.think = liquid_fly;
 };
-
-/*
-void(vector pos) liquid_drop =
-{
-	local entity chunk, found;
-	
-	chunk = spawn_temp();
-	chunk.spelldamage = self.spelldamage;
-	chunk.spellradiusmod = self.spellradiusmod;
-	chunk.ltime = time;
-	chunk.owner = self.owner;
-	chunk.lifetime = random(3.00000, 5.00000);
-	chunk.splash_time = time + chunk.lifetime;
-	chunk.classname = "slimespot";
-	chunk.movetype = MOVETYPE_NOCLIP;
-	chunk.solid = SOLID_NOT;
-	//chunk.cnt = (1 + random(3));
-	chunk.think = liquid_drop_timer;
-	thinktime chunk : HX_FRAME_TIME;
-
-	setmodel (chunk, "models/bloodspot.mdl");
-	chunk.skin = 2;
-	chunk.scale = (0.25000 + random(1.62500));
-	setsize (chunk, '0 0 0', '0 0 0');
-	setorigin (chunk, pos);
-	chunk.angles = random('0.00000 -180.00000 0.00000','0.00000 180.00000 0.00000');
-	
-	found = T_RadiusDamageFlat (chunk, chunk.owner, (chunk.spelldamage + random(chunk.spelldamage*(-0.12500), chunk.spelldamage*0.12500))*0.12500, 128.00000, chunk.owner, 2);
-	while (found)
-	{
-		apply_status(found, STATUS_TOXIC, (self.spelldamage * 0.12500), random(7, 11));
-		found = found.chain2;
-	}
-};
-*/
 
 void() squelch = {
 	self.colormap = 0;
