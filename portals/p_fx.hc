@@ -19,7 +19,7 @@ void () ChunkShrink =
 		self.drawflags (-) DRF_TRANSLUCENT;
 	}
 	if (self.scale < 0.1) {
-		if ((self.classname == "blackhole") || (self.classname == "basher") || (self.classname == "flame") || (self.classname == "slimespot"))
+		if ((self.classname == "blackhole") || (self.classname == "basher") || (self.classname == "flame") || (self.classname == "liquid_chunk"))
 			remove(self);
 		else
 			ChunkRemove();
@@ -268,7 +268,9 @@ void() liquid_drop = {
 		liquidcount += 1;
 
 		drop = spawn_temp();
+		drop.air_finished = self.air_finished;
 		drop.spelldamage = self.spelldamage;
+		drop.spellradiusmod = self.spellradiusmod;
 		drop.ltime = time;
 		drop.owner = self.owner;
 		drop.frame = 0;
@@ -290,10 +292,18 @@ void() liquid_drop = {
 		drop.touch = liquid_drop_timer;
 		drop.drawflags = MLS_ABSLIGHT;
 		drop.abslight = 1.50000;
-		drop.skin = 1;
 
 		// set drop duration
 		setmodel (drop, "models/bloodspot.mdl");
+		
+		if (self.air_finished == LIQUID_TYPE_BLOOD)
+			drop.skin = 0;
+		else if (self.air_finished == LIQUID_TYPE_LAVA)
+			drop.skin = 1;
+		else if ((self.air_finished == LIQUID_TYPE_SLIME) || (self.status_effects & STATUS_TOXIC))
+			drop.skin = 2;
+
+
 		drop.scale = (0.5 + random(2));
 		setsize (drop, '0 0 0', '0 0 0');
 		drop.angles = randomv('0.00000 -180.00000 0.00000','0.00000 180.00000 0.00000');
@@ -327,38 +337,7 @@ void() liquid_drop = {
 	}
 };
 
-void() liquid_fly = {
-	if (self.cnt>0) {
-		self.cnt -= 1;
-		liquid_drop();
-		thinktime self : 0.02;
-		self.think = liquid_fly;
-	} else {
-		thinktime self : 0.02;
-		self.think = SUB_Remove;
-	}
-};
-
-void(float amount, float radius, float force) liquid_spray = {
-	local entity missile;
-
-	make_liquid_reset();
-	missile = spawn();
-	missile.spelldamage = self.spelldamage;
-	missile.spellradiusmod = self.spellradiusmod;
-	missile.ltime = time;
-	missile.owner = self.owner;
-	missile.cnt = amount;
-	missile.exploderadius = radius;
-	missile.lip = rint(force);
-	missile.origin = self.origin;
-	thinktime missile : HX_FRAME_TIME;
-	missile.think = liquid_fly;
-};
-
-/*
-void(vector pos) liquid_drop =
-{
+void(vector pos) liquid_bubble = {
 	local entity chunk, found;
 	
 	chunk = spawn_temp();
@@ -368,7 +347,7 @@ void(vector pos) liquid_drop =
 	chunk.owner = self.owner;
 	chunk.lifetime = random(3.00000, 5.00000);
 	chunk.splash_time = time + chunk.lifetime;
-	chunk.classname = "slimespot";
+	chunk.classname = "liquid_chunk";
 	chunk.movetype = MOVETYPE_NOCLIP;
 	chunk.solid = SOLID_NOT;
 	//chunk.cnt = (1 + random(3));
@@ -380,7 +359,7 @@ void(vector pos) liquid_drop =
 	chunk.scale = (0.25000 + random(1.62500));
 	setsize (chunk, '0 0 0', '0 0 0');
 	setorigin (chunk, pos);
-	chunk.angles = random('0.00000 -180.00000 0.00000','0.00000 180.00000 0.00000');
+	chunk.angles = randomv('0.00000 -180.00000 0.00000','0.00000 180.00000 0.00000');
 	
 	found = T_RadiusDamageFlat (chunk, chunk.owner, (chunk.spelldamage + random(chunk.spelldamage*(-0.12500), chunk.spelldamage*0.12500))*0.12500, 128.00000, chunk.owner, 2);
 	while (found)
@@ -389,7 +368,36 @@ void(vector pos) liquid_drop =
 		found = found.chain2;
 	}
 };
-*/
+
+void() liquid_fly = {
+	if (self.cnt>0) {
+		self.cnt -= 1;
+		liquid_drop();
+		thinktime self : HX_FRAME_TIME;
+		self.think = liquid_fly;
+	} else {
+		thinktime self : HX_FRAME_TIME;
+		self.think = SUB_Remove;
+	}
+};
+
+void(float type, float amount, float radius, float force) liquid_spray = {
+	local entity missile;
+
+	make_liquid_reset();
+	missile = spawn();
+	missile.spelldamage = self.spelldamage;
+	missile.spellradiusmod = self.spellradiusmod;
+	missile.ltime = time;
+	missile.owner = self.owner;
+	missile.cnt = amount;
+	missile.exploderadius = radius;
+	missile.air_finished = type;
+	missile.lip = rint(force);
+	missile.origin = self.origin;
+	thinktime missile : HX_FRAME_TIME;
+	missile.think = liquid_fly;
+};
 
 void() squelch = {
 	self.colormap = 0;
@@ -409,7 +417,7 @@ void() BlowUp3 =
 	local entity head;
 	local float dist;
 	
-	if (self.scale >= (1.35000*self.spellradiusmod) && !self.drawflags & DRF_TRANSLUCENT)
+	if (self.scale >= (1.35000*self.spellradiusmod) && !(self.drawflags & DRF_TRANSLUCENT))
 	{
 		
 		self.drawflags (+) DRF_TRANSLUCENT;

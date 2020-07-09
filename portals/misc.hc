@@ -590,7 +590,7 @@ entity	bubble;
 		thinktime self : random(0.05,.15);
 	else if(self.wait == -2)
 		remove(self);
-	else if(self.wait = -1)
+	else if(self.wait == -1)
 		self.nextthink=-1;
 	else
 		thinktime self : self.wait + ((random()*self.level) - self.level/2)/100;

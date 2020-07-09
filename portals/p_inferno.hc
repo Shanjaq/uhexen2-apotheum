@@ -47,10 +47,13 @@ void ()firehail = {
 		newmis.classname = "swelterment";
 		setorigin(newmis, org);
 		traceline (newmis.origin , (newmis.origin-('0 0 600')) , TRUE , self);
-		if (random() < 0.75000) {
-			sound ( newmis, CHAN_AUTO, "trail1.wav", 1.00000, ATTN_NORM);
-		} else {
-			sound ( newmis, CHAN_AUTO, "trail.wav", 1.00000, ATTN_NORM);
+		if (random() < 0.5)
+		{
+			if (random() < 0.75000) {
+				sound ( newmis, CHAN_AUTO, "trail1.wav", 1.00000, ATTN_NORM);
+			} else {
+				sound ( newmis, CHAN_AUTO, "trail.wav", 1.00000, ATTN_NORM);
+			}
 		}
 		newmis.hit_z = (trace_endpos_z - 64.00000);
 		setmodel(newmis, "models/fball1.mdl");

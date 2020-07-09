@@ -13,7 +13,6 @@ void() SUB_NullDeath =
 		self.th_missile = SUB_Null;
 		self.th_melee = SUB_Null;
 		self.oldthink = SUB_Null;
-		self.th_pain = SUB_Null;
 		self.th_run = SUB_Null;
 		self.th_walk = SUB_Null;
 		self.th_stand = SUB_Null;
@@ -148,6 +147,12 @@ entity(vector pos, float radius, float notThingType, float withFlags2, float cho
 		}
 		
 		if ((coop != 0) && (found.classname == "player"))
+			skip = 1;
+		
+		if ((found.owner != world) && (self.owner != world) && (found.owner.team == self.owner.team))
+			skip = 1;
+		
+		if ((found.controller != world) && (self.controller != world) && (found.controller.team == self.controller.team))
 			skip = 1;
 		
 		if ((skip == 0) && (found.takedamage == DAMAGE_YES) && (found != self) && (found != self.owner) && (found.owner != self.owner) && (found != self.oldenemy) && (found != self.goalentity) && ((withFlags2 == 0) || (found.flags2 & withFlags2)))

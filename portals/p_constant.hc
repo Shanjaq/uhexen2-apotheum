@@ -5,7 +5,11 @@ float STATUS_TOXIC = 8;
 float STATUS_PARALYZE = 16;
 
 float TE_LIGHT_PULSE   =  33.00000;
+
 float MAX_LIQUID_COUNT = 64.00000;
+float LIQUID_TYPE_BLOOD = 0;
+float LIQUID_TYPE_LAVA = 1;
+float LIQUID_TYPE_SLIME = 2;
 
 float item_value[21] = { 0,
 	10, 15, 60,

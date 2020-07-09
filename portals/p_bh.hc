@@ -148,7 +148,7 @@ void() bh_suction = {
 					head.velocity = '0 0 0';
 					head.movetype = MOVETYPE_NOCLIP;
 					head.solid = SOLID_NOT;
-					head.drawflags & MLS_ABSLIGHT;
+					head.drawflags (+) MLS_ABSLIGHT;
 					head.abslight = 1.5;
 					head.colormap = 128;
 					thinktime head : 0.02;

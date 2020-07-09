@@ -174,7 +174,7 @@ void() toxic_status_effect =
 					WriteByte ( MSG_BROADCAST, SVC_TEMPENTITY);
 					WriteByte ( MSG_BROADCAST, TE_LIGHT_PULSE);
 					WriteEntity ( MSG_BROADCAST, splode);
-					
+
 					thinktime splode : 0.25;
 					T_RadiusDamageFlat (self.goalentity, self.owner, (self.toxic_dmg + random(self.toxic_dmg*(-0.12500), self.toxic_dmg*0.12500)) * random(7, 10), 128.00000/**self.spellradiusmod*/, self.owner, FALSE);
 				}

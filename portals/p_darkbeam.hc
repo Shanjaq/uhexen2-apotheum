@@ -61,6 +61,39 @@ void(vector start) dark_tendrils = {
 	newmis.think = dark_tendrils_think;
 };
 
+void() darkbeam_remove = {
+	stopSound(self,CHAN_AUTO);
+	remove(self);
+};
+
+void() baddie_sink = {
+	if (time < self.splash_time)
+	{
+		if ((self.lip - self.origin_z) < (self.size_z * 0.5))
+			self.abslight = (0.75 * (((self.size_z * 0.5) - (self.lip - self.origin_z)) / (self.size_z * 0.5)));
+		else
+		{
+			if (self.state == 0)
+			{
+				self.state = 1;
+				self.cnt = random(0, 3);
+				if (self.cnt < 1)
+					sound ( self, CHAN_VOICE, "ambience/moan1.wav", 1.00000, ATTN_NORM);
+				else if (self.cnt < 2)
+					sound ( self, CHAN_VOICE, "ambience/moan2.wav", 1.00000, ATTN_NORM);
+				else if (self.cnt < 3)
+					sound ( self, CHAN_VOICE, "ambience/moan3.wav", 1.00000, ATTN_NORM);
+				
+			}
+		}
+		
+		thinktime self : 0.1;
+		self.think = baddie_sink;
+	}
+	else
+		remove(self);
+};
+
 void() darkbeam_think = {
 	local entity head;
 	local vector start;
@@ -97,16 +130,22 @@ void() darkbeam_think = {
 								if (head.halted == 0)
 								{
 									head.halted = 1;
+									head.solid = SOLID_NOT;
 									head.movetype = MOVETYPE_NOCLIP;
 									head.velocity_z = -36;
 									head.drawflags (+) MLS_ABSLIGHT;
 									head.abslight = 0.75;
+									head.splash_time = time + 3.5;
+									head.lip = head.origin_z;
+									head.state = 0;
+									T_Damage ( head, self, self.owner, head.health);
+									head.takedamage = DAMAGE_NO;
 									
 									if (self.owner != world)
 										AwardExperience ( self.owner, head, head.experience_value);
 									
-									thinktime head : 5;
-									head.think = SUB_Remove;
+									thinktime head : HX_FRAME_TIME;
+									head.think = baddie_sink;
 								} else {
 									if (head.abslight > 0.07500)
 										head.abslight -= 0.07500;
@@ -125,7 +164,7 @@ void() darkbeam_think = {
 		thinktime self : 0.10000;
 	} else {
 		sound ( self, CHAN_AUTO, "ambience/newhum1.wav", 1.00000, ATTN_NORM);
-		self.think = SUB_Remove;
+		self.think = darkbeam_remove;
 		thinktime self : 3;
 	}
 };

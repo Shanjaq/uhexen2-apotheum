@@ -34,7 +34,6 @@ void ()frost_ice_sheet = {
 
 void ()frost_timer = {
 	local float pc;
-	local vector move_angle;
 	
 	self.dmg = self.spelldamage + random(self.spelldamage*(-0.12500), self.spelldamage*0.12500);
 	if (time < self.splash_time) {

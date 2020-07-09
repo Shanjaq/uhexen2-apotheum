@@ -1,5 +1,4 @@
 void() cloud_think = {
-	local entity nearest;
 
 	if (time < self.lifespan)
 	{

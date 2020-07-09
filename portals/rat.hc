@@ -9,7 +9,7 @@
 //$frame swalk16
 
 void() rat_wait;
-void() rat_noise;
+void(float vol) rat_noise;
 void rat_die_wait()
 {
 	if(self.health<-80)
@@ -105,7 +105,7 @@ float player_see_me;
 	}
 
 	if(random()<0.1&&random()<0.1)
-		rat_noise();
+		rat_noise ( random(0.20000,0.80000));
 
 	if(self.goalentity.classname=="player")
 	{
@@ -150,18 +150,10 @@ float player_see_me;
 	}
 }
 
-void rat_wait ()
+void rat_noise (float vol)
 {
-	if(vlen(self.goalentity.origin-self.origin)>56)
-		self.think=ratrun;
-	else
-		self.think=rat_wait;
-	thinktime self : 0.05;
-}
-
-void rat_noise (void)
-{
-	sound(self,CHAN_VOICE,"misc/squeak.wav",1,ATTN_NORM);
+	sound(self,CHAN_VOICE,"misc/squeak.wav",vol,ATTN_NORM);
+	self.pain_finished = (time + random(1.00000,12.00000));
 }
 
 void rat_touch (void)
@@ -201,15 +193,151 @@ void rat_stupor (void)
 {
 	self.angles_y+=random(-2,2);
 	self.frame=random(17);
-	self.think=rat_stupor;
+	self.think=rat_wait;
 	thinktime self : random(0.3,1.3);
+}
+
+void  (float dist)rat_move =  {
+  if (self.frame >= 16)
+	  self.frame = 0;
+  else
+	  self.frame += 2;
+  
+  movetogoal ( self.speed);
+};
+
+void  ()rat_think =  {
+	local entity nearest;
+	MonsterCheckContents ( );
+	if (time > self.lifetime) {
+		remove(self);
+		return;
+	}
+	
+	if ( self.goalentity != world ) {
+		if (self.goalentity == self.controller)
+		{
+			self.dest = (self.goalentity.origin - self.origin);
+			if (vlen(self.dest) <= 100.00000)
+			{
+				self.think = rat_wait;
+				self.th_stand = rat_wait;
+				self.th_walk = rat_wait; //shan
+			}
+			else
+			{
+				self.th_stand = rat_stupor;
+				self.th_walk = rat_move;
+				self.th_walk();
+			}
+			
+			droptofloor ( );
+			nearest = findNearestHurtable(self.origin, 500.00000, 0, FL_ALIVE, FALSE);
+			if (nearest != world)
+			{
+				self.goalentity = nearest;
+				self.enemy = nearest;
+			}
+		}
+		else 
+		{
+			if (!(self.goalentity.flags2 & FL_ALIVE))
+			{
+				droptofloor ( );
+				nearest = findNearestHurtable(self.origin, 500.00000, 0, FL_ALIVE, FALSE);
+				if (nearest != world)
+				{
+					self.goalentity = nearest;
+					self.enemy = nearest;
+				}
+				else
+				{
+					self.goalentity = self.controller;
+					self.enemy = self.controller;
+				}
+			}
+			
+			self.dest = (self.goalentity.origin - self.origin);
+			if (vlen(self.dest) <= 32.00000)
+			{
+				if (time > self.attack_finished)
+				{
+					if (random() < 0.5)
+					{
+						self.frame = random(17.00000);
+						self.last_attack = time;
+						self.attack_state = AS_MELEE;
+						self.th_melee();
+					}
+					else
+					{
+						if ( !walkmove ( self.angles_y, 3.00000, FALSE) )
+						{
+							sheep_turn ( ); //shan borrowing this
+						}
+					}
+				}
+			}
+			else
+			{
+				self.th_walk();//movetogoal (self.speed);
+			}
+		}
+	} else {
+		if (self.controller)
+		{
+			nearest = findNearestHurtable(self.origin, 512.00000, 0, FL_ALIVE, FALSE);
+			if (nearest != world)
+			{
+				self.goalentity = nearest;
+				self.enemy = nearest;
+			}
+			else
+			{
+				self.goalentity = self.controller;
+				self.enemy = self.controller;
+			}
+			droptofloor ( );
+		} else {
+			self.th_walk();
+		}
+	}
+	if ((self.controller.classname != "player") && (self.controller.enemy != world))
+	{
+		self.goalentity = self.controller.enemy;
+		self.enemy = self.controller.enemy;
+	}
+	if ( (((random() < 0.10000) && (random() < 0.20000)) && (self.pain_finished < time)) ) {
+		rat_noise ( random(0.20000,0.80000));
+	}
+	
+	self.think = rat_think;
+	thinktime self : HX_FRAME_TIME;
+};
+
+void rat_wait ()
+{
+	if (self.goalentity) {
+		if ( (vlen ( (self.goalentity.origin - self.origin)) > 64.00000) ) {
+			self.think = rat_think;
+			self.th_stand = rat_stupor;
+			self.th_walk = rat_move;
+		}
+	} else {
+		self.think = rat_think;
+		self.th_stand = rat_stupor;
+		self.th_walk = rat_move;
+
+	}
+	
+	thinktime self : 0.25000;
 }
 
 void rat_go (void)
 {
-	self.th_stand = ratrun;
-	self.th_walk = ratrun;
-	self.think=ratrun;
+	self.th_walk = rat_move;
+	self.th_run = rat_move;
+	self.think = rat_think;
 	thinktime self : 0;
 }
 
@@ -222,12 +350,16 @@ void monster_rat (void)
 		precache_sound("misc/squeak.wav");
 		self.th_stand = rat_stupor;
 		self.th_walk = rat_stupor;
+		self.lifetime = (time + random(5.00000,12.00000));
 		self.use=rat_go;
 	}
 	else
 	{
-		self.th_stand = ratrun;
-		self.th_walk = ratrun;
+		self.th_stand = rat_stupor;
+		self.th_walk = rat_move;
+		self.lifetime = (time + random(14.00000, 18.00000));
+		self.goalentity = self.controller;
+		self.use = rat_go;
 	}
 
 	setmodel(self, "models/rat.mdl");
@@ -240,24 +372,30 @@ void monster_rat (void)
 		self.angles_x=10;
 	}
 
-	self.touch=rat_touch;
+	self.touch=obj_push;
+	self.flags(+)FL_PUSH;
+	self.flags2(+)FL_ALIVE;
 	self.classname="monster_rat";
 
 	setsize(self, '-3 -3 0', '3 3 7');
 	self.hull = HULL_POINT;
-	self.health = 3;
+	self.health = 25;
 
 	self.thingtype=THINGTYPE_FLESH;
-	self.th_run = ratrun;
-	self.th_melee = ratrun;
-	self.th_missile = ratrun;
+	self.th_run = rat_move;
+	self.th_melee = monster_sheep_bite;
+	//self.th_missile = ratrun;
 	self.th_pain = rat_noise;
 	self.th_die = rat_death;
+	self.think = rat_think;	
 
 	self.flags(+)FL_MONSTER;
 	self.yaw_speed = 10;
-	self.lifetime = time+10;
+	self.speed = 6.00000;
+	self.mass = 1.00000;
+	self.mintel = 5.00000;
 
+	/*
 	if(!self.target)
 	{
 		self.ideal_yaw=random(360);
@@ -265,7 +403,8 @@ void monster_rat (void)
 //		self.solid=SOLID_NOT;
 		rat_make_goal();
 	}
-
+	*/
+	thinktime self : 0.25000;
 	walkmonster_start();
 }
 

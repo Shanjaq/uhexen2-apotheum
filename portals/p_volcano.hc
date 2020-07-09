@@ -20,7 +20,7 @@ void ()lava_splash = {
 			setmodel (self, "models/splat.mdl");
 			T_RadiusDamageFlat (self, self.owner, (self.spelldamage + random(self.spelldamage*(-0.12500), self.spelldamage*0.12500))*0.62500, 240.00000 * self.spellradiusmod, self.owner, FALSE);
 			self.exploderadius = 0;
-			liquid_spray((random(4, 8) * self.spellradiusmod), (100 * self.spellradiusmod), 180);
+			liquid_spray(LIQUID_TYPE_LAVA, (random(4, 8) * self.spellradiusmod), (100 * self.spellradiusmod), 180);
 		}
 		thinktime self : 0.1;
 		self.think = lava_splash;
