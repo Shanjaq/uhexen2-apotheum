@@ -66,7 +66,7 @@ void() bushbash_bash = {
 		traceline (self.catapulter.origin , (self.catapulter.origin-('0 0 800')) , TRUE , self);
 		if ((self.catapulter.origin_z - trace_endpos_z) < 120) {
 			if ((self.catapulter.thingtype == THINGTYPE_FLESH) && (self.catapulter.netname != "spider")) {
-				liquid_spray((5 + random(4)), (10 * self.spellradiusmod), 100);
+				liquid_spray(LIQUID_TYPE_BLOOD, (5 + random(4)), (10 * self.spellradiusmod), 100);
 			}
 		}
 	}

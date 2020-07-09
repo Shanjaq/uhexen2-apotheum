@@ -62,7 +62,7 @@ void() blackdeath_fear_think =
 						if (self.th_run)
 							self.th_run();
 						else
-							self.th_walk;
+							self.th_walk();
 					}
 					else
 					{
@@ -93,30 +93,14 @@ void() blackdeath_sink = {
 			self.catapulter.solid = SOLID_NOT;
 			self.effects = EF_DARKLIGHT;
 			self.catapulter.movetype = MOVETYPE_NOCLIP;
-			if (self.catapulter.classname == "monster_archer") {
-				sound ( self, CHAN_VOICE, "burnme.wav", 1.00000, ATTN_NORM);
-			}
-			if (self.catapulter.classname == "monster_archer_lord") {
-				sound ( self, CHAN_VOICE, "burnme.wav", 1.00000, ATTN_NORM);
-			}
-			if (self.catapulter.classname == "monster_mezzoman") {
-				sound ( self, CHAN_VOICE, "burnme.wav", 1.00000, ATTN_NORM);
-			}
-			if (self.catapulter.classname == "monster_werepanther") {
-				sound ( self, CHAN_VOICE, "burnme.wav", 1.00000, ATTN_NORM);
-			}
-			if ((self.catapulter.classname == "player") && (self.catapulter.playerclass != CLASS_ASSASSIN)) {
-				sound ( self, CHAN_VOICE, "burnme.wav", 1.00000, ATTN_NORM);
-			}
-			if (self.catapulter.playerclass == CLASS_ASSASSIN) {
-				sound ( self, CHAN_VOICE, "player/assdie1.wav", 1.00000, ATTN_NONE);
-			}
-			if (self.catapulter.classname == "monster_medusa") {
-				sound ( self, CHAN_VOICE, "medusa/death.wav", 1.00000, ATTN_NORM);
-			}
-			if (self.catapulter.model == "models/sheep.mdl") {
-				sound ( self, CHAN_VOICE, "misc/sheepfly.wav", 1.00000, ATTN_NORM);
-			}
+
+			self.state = random(0, 3);
+			if (self.state < 1)
+				sound ( self.catapulter, CHAN_VOICE, "ambience/moan1.wav", 1.00000, ATTN_NORM);
+			else if (self.state < 2)
+				sound ( self.catapulter, CHAN_VOICE, "ambience/moan2.wav", 1.00000, ATTN_NORM);
+			else if (self.state < 3)
+				sound ( self.catapulter, CHAN_VOICE, "ambience/moan3.wav", 1.00000, ATTN_NORM);
 		}
 	}
 	if (self.cnt < 36) {
@@ -283,7 +267,7 @@ void() blackdeath_set = {
 			//setorigin(self.catapulter, self.catapulter.difpos);
 			//particle2 ( (self.origin + randomv('-30 -30 -30', '30 30 30')), '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', random(1, 6), 2, 80.00000);
 
-			if (random() < 0.5)
+			if (random() < 0.3625)
 			{
 				pos = randomv(self.catapulter.absmin, self.catapulter.absmax);
 				//shan lightning effect

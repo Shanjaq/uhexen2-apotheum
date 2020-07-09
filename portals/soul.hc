@@ -93,6 +93,9 @@ void () necro_soul_touch =
 		other.greenmana += pot_mult;
 		if (other.greenmana > other.max_mana)
 			other.greenmana = other.max_mana;
+		other.elemana += pot_mult;
+		if (other.elemana > other.max_mana)
+			other.elemana = other.max_mana;
 
 		sprint (other, "You have devoured a life force!\n");
 

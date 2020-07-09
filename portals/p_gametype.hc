@@ -394,7 +394,6 @@ void() gametype_think = {
 	}
 
 	if (self.enemy.stepy == 2) {
-		local entity found;
 		found = nextent (world);
 		while ( found ) {
 
@@ -456,7 +455,6 @@ void() chaos_sphere_death = {
 };
 
 void() chaos_sphere_think = {
-	local entity found;
 	setorigin(self, self.o_angle);
 	self.velocity = '0 0 0';
 	/*
@@ -605,7 +603,6 @@ void() make_flock = {
 				i *= -1;
 			}
 		}
-		newmis.th_pain = sheep_pain;
 		newmis.touch = obj_push;
 		newmis.flags (+) FL_PUSH;
 		newmis.flags2 (+) FL_ALIVE;
@@ -1072,7 +1069,6 @@ void() magic_shop_portal_think = {
 };
 
 void() magic_shop_portal = {
-	local entity found;
 	
 	newmis = find ( world, classname, "shopportal");
 	while ( newmis ) {

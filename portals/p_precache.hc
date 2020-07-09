@@ -67,22 +67,24 @@ void () Precache_Magic_Snd =
    precache_sound2 ( "beamhit4.wav");
    precache_sound2 ( "baer/gntact1.wav");
    precache_sound2 ( "golem/stomp.wav");
-   precache_sound ( "raven/kiltorch.wav");
-   precache_sound ( "raven/littorch.wav");
-   precache_sound ( "raven/fire1.wav");
-   precache_sound ( "ambience/water.wav");
-   precache_sound ( "rj/steve.wav");
-   precache_sound ( "weapons/ric1.wav");
-   precache_sound ( "weapons/ric2.wav");
-   precache_sound ( "weapons/ric3.wav");
-   precache_sound ( "weapons/tink1.wav");
-   precache_sound ( "weapons/r_exp3.wav");
-   precache_sound ( "misc/squeak.wav");
-   
+   precache_sound2 ( "raven/kiltorch.wav");
+   precache_sound2 ( "raven/littorch.wav");
+   precache_sound2 ( "raven/fire1.wav");
+   precache_sound2 ( "ambience/water.wav");
+   precache_sound2 ( "rj/steve.wav");
+   precache_sound2 ( "weapons/ric1.wav");
+   precache_sound2 ( "weapons/ric2.wav");
+   precache_sound2 ( "weapons/ric3.wav");
+   precache_sound2 ( "weapons/tink1.wav");
+   precache_sound2 ( "weapons/r_exp3.wav");
+   precache_sound2 ( "misc/squeak.wav");
+   precache_sound2 ( "ambience/moan1.wav");
+   precache_sound2 ( "ambience/moan2.wav");
+   precache_sound2 ( "ambience/moan3.wav");
+   precache_sound2 ( "weapons/vorppwr.wav");
+   precache_sound2 ( "crusader/tornado.wav");
+  
    precache_sound3 ( "player/money.wav");
-   precache_model ( "models/i_ymana.mdl");
-   set_extra_flags ("models/i_ymana.mdl", XF_GLOW);
-   set_fx_color ("models/i_ymana.mdl", 0.5, 0.5, 0.125, 0.5);
 };
 
 void () Precache_Magic_Mdl =
@@ -189,6 +191,13 @@ void () Precache_Magic_Mdl =
    precache_model ( "models/quiver.mdl");
    precache_model ( "models/dthball.mdl");
    precache_model ( "models/teleport.mdl");
+   precache_model ( "models/blast.mdl");
+   set_extra_flags ("models/blast.mdl", XF_COLOR_LIGHT);
+   set_fx_color ("models/blast.mdl", 1.0, 0.3625, 0.01, 0.5);
+   precache_model ( "models/vorpshk2.mdl");
+   precache_model ( "models/i_ymana.mdl");
+   set_extra_flags ("models/i_ymana.mdl", XF_GLOW);
+   set_fx_color ("models/i_ymana.mdl", 0.5, 0.5, 0.125, 0.5);
 };
 
 void () Precache_Magic =

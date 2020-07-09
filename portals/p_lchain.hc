@@ -1,9 +1,6 @@
 void() lchain_think = {
 	local entity nearest;
 	
-	local float dist1;
-	local float dist2;
-
 	if (self.count == self.lip)
 		nearest = self.enemy;
 	else

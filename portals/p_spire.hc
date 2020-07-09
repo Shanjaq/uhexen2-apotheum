@@ -87,7 +87,7 @@ void (entity holdee) hold = {
 	{
 		newmis.dmg = newmis.spelldamage + random(newmis.spelldamage*(-0.12500), newmis.spelldamage*0.12500);
 		if (holdee.thingtype == THINGTYPE_FLESH) {
-			liquid_spray((5 + random(4)), (10 * self.spellradiusmod), 100);
+			liquid_spray(LIQUID_TYPE_BLOOD, (5 + random(4)), (10 * self.spellradiusmod), 100);
 			newmis.skin = 1;
 		} else {
 			newmis.skin = 0;

@@ -119,7 +119,7 @@ vector (entity targ, entity forent)find_random_spot =
 
 void ()spawn_refresh = {
 	local float nextaction = 0.1;
-	local float total, pc, tmp, layer, step;
+	local float total, tmp, layer, step;
 	local entity result;
 	local entity search;
 	local vector pos;

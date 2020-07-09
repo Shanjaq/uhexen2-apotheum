@@ -74,8 +74,8 @@ entity() LeapFindTarget =
 
 void() LeapFrogThink = 
 { 
-	local vector dir, vtemp, tm; 
-	local float r,dist; 
+	local vector dir, vtemp; 
+	local float dist; 
 
 	if (time < self.splash_time)
 	{

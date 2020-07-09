@@ -104,7 +104,7 @@ void() balloffire_crash = {
 			found = found.chain2;
 		}
 	
-		liquid_spray((random(1, 3) * self.spellradiusmod), (10 * self.spellradiusmod), 100);
+		liquid_spray(LIQUID_TYPE_LAVA, (random(1, 3) * self.spellradiusmod), (10 * self.spellradiusmod), 100);
 	}
 	
 	sound (self, CHAN_WEAPON, "raven/littorch.wav", 1, ATTN_NORM); 

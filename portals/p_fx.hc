@@ -268,6 +268,7 @@ void() liquid_drop = {
 		liquidcount += 1;
 
 		drop = spawn_temp();
+		drop.air_finished = self.air_finished;
 		drop.spelldamage = self.spelldamage;
 		drop.spellradiusmod = self.spellradiusmod;
 		drop.ltime = time;
@@ -294,8 +295,14 @@ void() liquid_drop = {
 
 		// set drop duration
 		setmodel (drop, "models/bloodspot.mdl");
-		if (self.status_effects & STATUS_TOXIC)
+		
+		if (self.air_finished == LIQUID_TYPE_BLOOD)
+			drop.skin = 0;
+		else if (self.air_finished == LIQUID_TYPE_LAVA)
+			drop.skin = 1;
+		else if ((self.air_finished == LIQUID_TYPE_SLIME) || (self.status_effects & STATUS_TOXIC))
 			drop.skin = 2;
+
 
 		drop.scale = (0.5 + random(2));
 		setsize (drop, '0 0 0', '0 0 0');
@@ -366,15 +373,15 @@ void() liquid_fly = {
 	if (self.cnt>0) {
 		self.cnt -= 1;
 		liquid_drop();
-		thinktime self : 0.02;
+		thinktime self : HX_FRAME_TIME;
 		self.think = liquid_fly;
 	} else {
-		thinktime self : 0.02;
+		thinktime self : HX_FRAME_TIME;
 		self.think = SUB_Remove;
 	}
 };
 
-void(float amount, float radius, float force) liquid_spray = {
+void(float type, float amount, float radius, float force) liquid_spray = {
 	local entity missile;
 
 	make_liquid_reset();
@@ -385,6 +392,7 @@ void(float amount, float radius, float force) liquid_spray = {
 	missile.owner = self.owner;
 	missile.cnt = amount;
 	missile.exploderadius = radius;
+	missile.air_finished = type;
 	missile.lip = rint(force);
 	missile.origin = self.origin;
 	thinktime missile : HX_FRAME_TIME;
@@ -409,7 +417,7 @@ void() BlowUp3 =
 	local entity head;
 	local float dist;
 	
-	if (self.scale >= (1.35000*self.spellradiusmod) && !self.drawflags & DRF_TRANSLUCENT)
+	if (self.scale >= (1.35000*self.spellradiusmod) && !(self.drawflags & DRF_TRANSLUCENT))
 	{
 		
 		self.drawflags (+) DRF_TRANSLUCENT;

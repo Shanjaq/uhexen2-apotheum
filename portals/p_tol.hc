@@ -91,7 +91,6 @@ void ()tol_think = {
 
 void ()tol_grow = {
 	local entity top;
-	local entity oself;
 
 	if (self.scale >= 1.2) {
 		if (self.click != 1)

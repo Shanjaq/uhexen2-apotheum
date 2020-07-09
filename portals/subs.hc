@@ -480,37 +480,40 @@ string s;
 //
 	if(self.killtarget)
 	{
-		t = world;
-		do
+		if (self.killtarget!="")
 		{
-			t = find(t, targetname, self.killtarget);
-			if(t!=world)
+			t = world;
+			do
 			{
-				if(self.classname=="func_train")
-				{//Trains can't target things when they die, so use killtarget
-					if(t.th_die)
-					{
-						if(t.th_die==obj_barrel_explode)
-							t.think=t.use;
+				t = find(t, targetname, self.killtarget);
+				if(t!=world)
+				{
+					if(self.classname=="func_train")
+					{//Trains can't target things when they die, so use killtarget
+						if(t.th_die)
+						{
+							if(t.th_die==obj_barrel_explode)
+								t.think=t.use;
+							else
+								t.think=t.th_die;
+							thinktime t : .01;
+							t.targetname="";
+						}
+						else if(t.health)
+						{
+							t.think=chunk_death;
+							thinktime t : .01;
+							t.targetname="";
+						}
 						else
-							t.think=t.th_die;
-						thinktime t : .01;
-						t.targetname="";
-					}
-					else if(t.health)
-					{
-						t.think=chunk_death;
-						thinktime t : .01;
-						t.targetname="";
+							remove(t);
 					}
 					else
 						remove(t);
 				}
-				else
-					remove(t);
 			}
+			while(t!=world);
 		}
-		while(t!=world);
 	}
 
 //
@@ -519,73 +522,76 @@ string s;
 	self.style=0;
 	if (self.target)
 	{
-		act = activator;
-		t = world;
-		loop /*do*/ {
-			t = find (t, targetname, self.target);
-			if (!t)
-			{
-				if(self.nexttarget!=""&&self.target!=self.nexttarget)
-					if(self.netname=="DelayedUse")
-						self.owner.target=self.nexttarget;
-					else
-						self.target=self.nexttarget;
-				return;
-			}
-			if(t.style>=32&&t.style!=self.style)
-			{
-				self.style=t.style;
-				if(self.classname=="breakable_brush")
+		if (self.target!="")
+		{
+			act = activator;
+			t = world;
+			loop /*do*/ {
+				t = find (t, targetname, self.target);
+				if (!t)
 				{
-					lightstylestatic(self.style,0);
-					stopSound(self,CHAN_BODY);
-					//sound(self,CHAN_BODY, "misc/null.wav", 0.5, ATTN_STATIC);
+					if(self.nexttarget!=""&&self.target!=self.nexttarget)
+						if(self.netname=="DelayedUse")
+							self.owner.target=self.nexttarget;
+						else
+							self.target=self.nexttarget;
+					return;
 				}
-				else
-					lightstyle_change(t);
-			}
-			stemp = self;
-			otemp = other;
-			self = t;
-			other = stemp;
-			if (other.classname == "trigger_activate")
-				if (!self.inactive) 
-					self.inactive = TRUE;
-				else
-					self.inactive = FALSE;
-			else if (other.classname == "trigger_deactivate")
-				self.inactive = TRUE;
-			else if (other.classname == "trigger_combination_assign"&& self.classname=="trigger_counter")
-				self.mangle = other.mangle;
-			else if (other.classname == "trigger_counter_reset"&& self.classname=="trigger_counter")
-			{
-				self.cnt = 1;
-				self.count = self.frags;
-				self.items = 0;
-			}
-			else if (self.use != SUB_Null&&!self.inactive)
-			{	//Else here because above trigger types should not use it's target
-//				if(self.classname=="obj_talkinghead"&&self.think!=talkhead_idle)
-//					dprint("Already talking, please wait!\n");
-//				else 
-				if (self.use)
+				if(t.style>=32&&t.style!=self.style)
 				{
-/*					if(self.classname=="trigger_changelevel")
+					self.style=t.style;
+					if(self.classname=="breakable_brush")
 					{
-						dprint(stemp.classname);
-						dprint(" firing ");
-						dprint(self.classname);
-						dprint(" target: ");
-						dprint(self.targetname);
-						dprint("\n");
+						lightstylestatic(self.style,0);
+						stopSound(self,CHAN_BODY);
+						//sound(self,CHAN_BODY, "misc/null.wav", 0.5, ATTN_STATIC);
 					}
-*/					self.use ();
+					else
+						lightstyle_change(t);
 				}
-			}
-			self = stemp;
-			other = otemp;
-			activator = act;
-		} /*while (1);*/
+				stemp = self;
+				otemp = other;
+				self = t;
+				other = stemp;
+				if (other.classname == "trigger_activate")
+					if (!self.inactive) 
+						self.inactive = TRUE;
+					else
+						self.inactive = FALSE;
+				else if (other.classname == "trigger_deactivate")
+					self.inactive = TRUE;
+				else if (other.classname == "trigger_combination_assign"&& self.classname=="trigger_counter")
+					self.mangle = other.mangle;
+				else if (other.classname == "trigger_counter_reset"&& self.classname=="trigger_counter")
+				{
+					self.cnt = 1;
+					self.count = self.frags;
+					self.items = 0;
+				}
+				else if (self.use != SUB_Null&&!self.inactive)
+				{	//Else here because above trigger types should not use it's target
+	//				if(self.classname=="obj_talkinghead"&&self.think!=talkhead_idle)
+	//					dprint("Already talking, please wait!\n");
+	//				else 
+					if (self.use)
+					{
+	/*					if(self.classname=="trigger_changelevel")
+						{
+							dprint(stemp.classname);
+							dprint(" firing ");
+							dprint(self.classname);
+							dprint(" target: ");
+							dprint(self.targetname);
+							dprint("\n");
+						}
+	*/					self.use ();
+					}
+				}
+				self = stemp;
+				other = otemp;
+				activator = act;
+			} /*while (1);*/
+		}
 	}
 }
 

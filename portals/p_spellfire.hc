@@ -488,7 +488,7 @@ void ()spell_marker_think = {
 	}
 
 	if (((thehand == 0) && (self.owner.Lfinger == self.count)) || ((thehand == 1) && (self.owner.Rfinger == self.count))) {
-		if (self.drawflags (+) DRF_TRANSLUCENT)
+		if (self.drawflags | DRF_TRANSLUCENT)
 		self.drawflags (-) DRF_TRANSLUCENT;
 	} else {
 		if (!(self.drawflags (+) DRF_TRANSLUCENT))
@@ -649,112 +649,112 @@ void (entity targ)spells_compute = {
 			centerprint(targ, "no spell!");
 		}
 		if (thespell == 1) {
-			centerprint (targ, "Telekinesis@ yellow@ -7");
+			centerprintf (targ, "Telekinesis@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 2) {
-			centerprint (targ, "Shell of Light@ yellow@ -damage");
+			centerprint (targ, "Shell of Light@ yellow@ damage");
 		}
 		if (thespell == 3) {
-			centerprint (targ, "Teleportation@ yellow@ -10");
+			centerprintf (targ, "Teleportation@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 4) {
-			centerprint (targ, "Summon Meteorite@ yellow@ -20");
+			centerprintf (targ, "Summon Meteorite@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 5) {
-			centerprint (targ, "Photon Beam@ yellow@ -30");
+			centerprintf (targ, "Photon Beam@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 6) {
-			centerprint (targ, "Radiant Matter@ yellow@ -40");
+			centerprintf (targ, "Radiant Matter@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 7) {
-			centerprint (targ, "Flame Wave@ yellow@ -self.level*2-->5");
+			centerprintf (targ, "Flame Wave@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 8) {
-			centerprint (targ, "Boot of Ignius@ yellow@ -5");
+			centerprintf (targ, "Boot of Ignius@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 9) {
-			centerprint (targ, "Lavaball@ yellow@ -10");
+			centerprintf (targ, "Lavaball@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 10) {
-			centerprint (targ, "Sweltering Sky@ yellow@ -15");
+			centerprintf (targ, "Sweltering Sky@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 11) {
-			centerprint (targ, "Pillar of Fire@ yellow@ -25");
+			centerprintf (targ, "Pillar of Fire@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 12) {
-			centerprint (targ, "Giga Flare@ yellow@ -40");
+			centerprintf (targ, "Giga Flare@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 13) {
-			centerprint (targ, "Lightning Strike@ yellow@ -8");
+			centerprintf (targ, "Lightning Strike@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 14) {
-			centerprint (targ, "Mole Spike@ yellow@ -8");
+			centerprintf (targ, "Mole Spike@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 15) {
-			centerprint (targ, "Arc of Death@ yellow@ -10");
+			centerprintf (targ, "Arc of Death@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 16) {
-			centerprint (targ, "Chain Lightning@ yellow@ -12");
+			centerprintf (targ, "Chain Lightning@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 17) {
-			centerprint (targ, "Landslide@ yellow@ -16");
+			centerprintf (targ, "Landslide@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 18) {
-			centerprint (targ, "Electrical Storm@ yellow@ -35");
+			centerprintf (targ, "Electrical Storm@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 19) {
-			centerprint (targ, "Razor Wind@ yellow@ -2");
+			centerprintf (targ, "Razor Wind@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 20) {
-			centerprint (targ, "Aero@ yellow@ -10");
+			centerprintf (targ, "Aero@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 21) {
-			centerprint (targ, "Bush Bash@ yellow@ -15");
+			centerprintf (targ, "Bush Bash@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 22) {
-			centerprint (targ, "Telluric Regeneration@ yellow@ -20");
+			centerprintf (targ, "Telluric Regeneration@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 23) {
-			centerprint (targ, "Tree of Life@ -30");
+			centerprintf (targ, "Tree of Life@ %s", targ.spellcost);
 		}
 		if (thespell == 24) {
-			centerprint (targ, "Tornado@ yellow@ -35");
+			centerprintf (targ, "Tornado@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 25) {
-			centerprint (targ, "Arctic Wind@ yellow@ -1/2");
+			centerprintf (targ, "Arctic Wind@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 26) {
-			centerprint (targ, "Cold Spike@ yellow@ -5");
+			centerprintf (targ, "Cold Spike@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 27) {
-			centerprint (targ, "Ice Cage@ yellow@ -7");
+			centerprintf (targ, "Ice Cage@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 28) {
-			centerprint (targ, "Crush Drop@ yellow@ -15");
+			centerprintf (targ, "Crush Drop@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 29) {
-			centerprint (targ, "Glacial Hail@ yellow@ -25");
+			centerprintf (targ, "Glacial Hail@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 30) {
-			centerprint (targ, "Tsunami@ yellow@ -35");
+			centerprintf (targ, "Tsunami@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 31) {
-			centerprint (targ, "Swarm of Rats@ yellow@ -10");
+			centerprintf (targ, "Swarm of Rats@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 32) {
-			centerprint (targ, "Black Death@ yellow@ -15");
+			centerprintf (targ, "Black Death@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 33) {
-			centerprint (targ, "Toxic Cloud@ yellow@ -20");
+			centerprintf (targ, "Toxic Cloud@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 34) {
-			centerprint (targ, "Dark Matter@ yellow@ -25");
+			centerprintf (targ, "Dark Matter@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 35) {
-			centerprint (targ, "Abyss@ yellow@ -30");
+			centerprintf (targ, "Abyss@ yellow@ %s", targ.spellcost);
 		}
 		if (thespell == 36) {
-			centerprint (targ, "Black Hole@ yellow@ -40");
+			centerprintf (targ, "Black Hole@ yellow@ %s", targ.spellcost);
 		}
 
 	}
