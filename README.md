@@ -1,2 +1,4 @@
 # uhexen2-apotheum
-test
+
+link to Peanut (for pak4.pak containing models & sounds, found in releases)
+https://github.com/Shanjaq/peanut
