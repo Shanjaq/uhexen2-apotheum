@@ -535,7 +535,37 @@ void end_sys_fields;
 		// super_damage in the "player" struct which used to lead T_Damage()
 		// making a pentacle monster in tibet1.bsp invulnerable, because of
 		// super_damage becoming negative..
-		vector dest, dest1, dest2;	//9 spots unioned
+		union
+		{
+			vector dest;
+			struct
+			{
+				float dest_x;
+				float dest_y;
+				float dest_z;
+			};
+		};
+		union
+		{
+			vector dest1;
+			struct
+			{
+				float dest1_x;
+				float dest1_y;
+				float dest1_z;
+			};
+		};
+		union
+		{
+			vector dest2;
+			struct
+			{
+				float dest2_x;
+				float dest2_y;
+				float dest2_z;
+			};
+		};
+		//9 spots unioned
 	};
 // Peanut ALL NEW CODE
 	//Status Effect Controller
