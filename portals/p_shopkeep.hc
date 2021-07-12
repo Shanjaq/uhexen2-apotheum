@@ -118,19 +118,19 @@ void() personal_magic_shop_think = {
 	if (self.stepy == 3) {
 		centerprint(self.enemy, "which finger will you equip?@1: Thumb@2: Index@3: Middle@4: Ring@5: Pinky@@7: Back@8: EXIT");
 		if (self.enemy.selection == 1) {
-			self.step4 == self.enemy.selection;
+			self.step4 = self.enemy.selection;
 		}
 		if (self.enemy.selection == 2) {
-			self.step4 == self.enemy.selection;
+			self.step4 = self.enemy.selection;
 		}
 		if (self.enemy.selection == 3) {
-			self.step4 == self.enemy.selection;
+			self.step4 = self.enemy.selection;
 		}
 		if (self.enemy.selection == 4) {
-			self.step4 == self.enemy.selection;
+			self.step4 = self.enemy.selection;
 		}
 		if (self.enemy.selection == 5) {
-			self.step4 == self.enemy.selection;
+			self.step4 = self.enemy.selection;
 		}
 
 		if (self.enemy.selection == 7) {
