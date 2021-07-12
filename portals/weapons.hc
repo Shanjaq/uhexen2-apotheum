@@ -1433,6 +1433,11 @@ void() W_WeaponFrame =
 {
 	ImpulseCommands ();
 // Peanut
+	if (p_binds_setup == 0)
+	{
+		mage_binds_setup();
+	}
+
 	if (self.handy == 2) {
 		if ((self.Lspell == 25) || (self.Lspell == 2)) {
 			if ((self.Lspell == 25) && (self.magic_finished < time))

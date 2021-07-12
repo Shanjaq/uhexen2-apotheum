@@ -12,9 +12,26 @@ void() bushbash_bit_spike = {
 		particle2 ( (self.origin + randomv('-30 -30 0', '30 30 300')), '-30.00000 -30.00000 50.00000', '30.00000 30.00000 100.00000', random(96, 104), 2, 80.00000);
 		thinktime self : 0.04;
 		self.think = bushbash_bit_spike;
+		self.splash_time = time + random(9.00000, 17.00000);
 	} else {
-		thinktime self : random(9.00000, 17.00000);
-		self.think = bushbash_bit_wither;
+		if (time >= self.splash_time)
+		{
+			thinktime self : HX_FRAME_TIME;
+			self.think = bushbash_bit_wither;
+		}
+		else
+		{
+			if (self.goalentity.status_effects & STATUS_TOXIC)
+			{
+				thinktime self : HX_FRAME_TIME;
+				self.think = obj_barrel_explode;
+			}
+			else
+			{
+				thinktime self : 0.5;
+				self.think = bushbash_bit_spike;
+			}
+		}
 	}
 };
 

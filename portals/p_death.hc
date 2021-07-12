@@ -62,7 +62,7 @@ void() blackdeath_fear_think =
 						if (self.th_run)
 							self.th_run();
 						else
-							self.th_walk();
+							self.th_walk;
 					}
 					else
 					{

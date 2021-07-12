@@ -629,14 +629,14 @@ void() ImpulseCommands =
 		}
 	}*/
 // Peanut ALL NEW CODE
-	else if (self.impulse == 51)
+	else if (self.impulse == IMPULSE_P_SHOP)
 	{
 		if (!deathmatch) {
 			//	enter_magic_shop(mapname);
 			magic_shop_portal();
 		}
 	}
-	else if (self.impulse == 53)
+	else if (self.impulse == IMPULSE_P_STATUS)
 	{
 		check_money ( );
 	}
@@ -644,7 +644,7 @@ void() ImpulseCommands =
 	{
 		test_status(STATUS_PARALYZE);
 	}
-	else if (self.impulse == 55)
+	else if (self.impulse == IMPULSE_P_SPELLSCHEAT)
 	{
 		self.mage = 1;
 		self.elemana = self.max_mana;
@@ -673,7 +673,7 @@ void() ImpulseCommands =
 		self.Rfinger5Support = 0;
 		spells_compute(self);
 	}
-	else if (self.impulse == 57)
+	else if (self.impulse == IMPULSE_P_SPELLDEC)
 	{
 		if (self.mage == 1) {
 			if ((self.handy == 0) || (self.handy == 1)) {
@@ -702,7 +702,7 @@ void() ImpulseCommands =
 			return;
 		}
 	}
-	else if (self.impulse == 58)
+	else if (self.impulse == IMPULSE_P_SPELLINC)
 	{
 		if (self.mage == 1) {
 			if ((self.handy == 0) || (self.handy == 1)) {
@@ -731,7 +731,7 @@ void() ImpulseCommands =
 			return;
 		}
 	}
-	else if (self.impulse == 59)
+	else if (self.impulse == IMPULSE_P_SPELLLEFT)
 	{
 		if (self.mage == 1) {
 			if ((self.handy == 0) && (time < self.menu_time))
@@ -764,7 +764,7 @@ void() ImpulseCommands =
 			return;
 		}
 	}
-	else if (self.impulse == 60)
+	else if (self.impulse == IMPULSE_P_SPELLRIGHT)
 	{
 		if (self.mage == 1) {
 			if ((self.handy == 1) && (time < self.menu_time))
@@ -797,7 +797,7 @@ void() ImpulseCommands =
 			return;
 		}
 	}
-	else if (self.impulse == 63)
+	else if (self.impulse == IMPULSE_P_SPELLUP)
 	{
 		self.click = 0;
 

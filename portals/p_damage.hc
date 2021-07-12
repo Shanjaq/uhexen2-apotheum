@@ -13,6 +13,7 @@ void() SUB_NullDeath =
 		self.th_missile = SUB_Null;
 		self.th_melee = SUB_Null;
 		self.oldthink = SUB_Null;
+		self.th_pain = SUB_Null;
 		self.th_run = SUB_Null;
 		self.th_walk = SUB_Null;
 		self.th_stand = SUB_Null;

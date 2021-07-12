@@ -19,6 +19,47 @@ void ()mage_spot = {
 	newmis.movetype = MOVETYPE_NOCLIP;
 };
 
+void (entity magician)mage_binds = {
+	stuffcmd(magician,"alias p_shop impulse ");
+	stuffcmd(magician,ftos(IMPULSE_P_SHOP));
+	stuffcmd(magician,"\n");
+	stuffcmd(magician,"alias p_status impulse ");
+	stuffcmd(magician,ftos(IMPULSE_P_STATUS));
+	stuffcmd(magician,"\n");
+	stuffcmd(magician,"alias p_spellscheat impulse ");
+	stuffcmd(magician,ftos(IMPULSE_P_SPELLSCHEAT));
+	stuffcmd(magician,"\n");
+	stuffcmd(magician,"alias p_spelldec impulse ");
+	stuffcmd(magician,ftos(IMPULSE_P_SPELLDEC));
+	stuffcmd(magician,"\n");
+	stuffcmd(magician,"alias p_spellinc impulse ");
+	stuffcmd(magician,ftos(IMPULSE_P_SPELLINC));
+	stuffcmd(magician,"\n");
+	stuffcmd(magician,"alias p_spellleft impulse ");
+	stuffcmd(magician,ftos(IMPULSE_P_SPELLLEFT));
+	stuffcmd(magician,"\n");
+	stuffcmd(magician,"alias p_spellright impulse ");
+	stuffcmd(magician,ftos(IMPULSE_P_SPELLRIGHT));
+	stuffcmd(magician,"\n");
+	stuffcmd(magician,"alias p_spellup impulse ");
+	stuffcmd(magician,ftos(IMPULSE_P_SPELLUP));
+	stuffcmd(magician,"\n");
+};
+
+void ()mage_binds_setup = {
+	local entity found;
+	
+	dprint("Setting Magic Aliases\n");
+	found = find(world, classname, "player");
+	while (found)
+	{
+		mage_binds(found);
+		found = find ( found, classname, "player");
+	}	
+	
+	p_binds_setup = 1;
+};
+
 void (entity magician)make_mage = {
 	local float themod, i;
 
@@ -117,6 +158,7 @@ void (entity magician)make_mage = {
 	MonsterQuake2(200.0, magician);
 	sound(magician, 3, "darkburst.wav", 1, 1);
 	sprint(magician, "You have acquired the Chaos Sphere!!\n");
+	mage_binds(magician);
 
 };
 
@@ -357,7 +399,7 @@ void() gametype_think = {
 			while ( found ) {
 
 				if ( (found.classname == "player") && (found.mage == 0) ) {
-					stuffcmd(found, "impulse 55");
+					stuffcmd(found, "impulse 55"); //IMPULSE_P_SPELLSCHEAT
 					make_mage(found);
 				}
 				found = find ( found, classname, "player");
@@ -394,6 +436,7 @@ void() gametype_think = {
 	}
 
 	if (self.enemy.stepy == 2) {
+		local entity found;
 		found = nextent (world);
 		while ( found ) {
 
@@ -455,6 +498,7 @@ void() chaos_sphere_death = {
 };
 
 void() chaos_sphere_think = {
+	local entity found;
 	setorigin(self, self.o_angle);
 	self.velocity = '0 0 0';
 	/*
@@ -603,6 +647,7 @@ void() make_flock = {
 				i *= -1;
 			}
 		}
+		newmis.th_pain = sheep_pain;
 		newmis.touch = obj_push;
 		newmis.flags (+) FL_PUSH;
 		newmis.flags2 (+) FL_ALIVE;
@@ -1069,6 +1114,7 @@ void() magic_shop_portal_think = {
 };
 
 void() magic_shop_portal = {
+	local entity found;
 	
 	newmis = find ( world, classname, "shopportal");
 	while ( newmis ) {

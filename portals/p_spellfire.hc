@@ -488,7 +488,7 @@ void ()spell_marker_think = {
 	}
 
 	if (((thehand == 0) && (self.owner.Lfinger == self.count)) || ((thehand == 1) && (self.owner.Rfinger == self.count))) {
-		if (self.drawflags | DRF_TRANSLUCENT)
+		if (self.drawflags (+) DRF_TRANSLUCENT)
 		self.drawflags (-) DRF_TRANSLUCENT;
 	} else {
 		if (!(self.drawflags (+) DRF_TRANSLUCENT))

@@ -1,4 +1,7 @@
 void() ShakeRattleAndRoll;
+void() flare_blast;
+void() flare_rings;
+
 
 // BAER
 void () ChunkShrink = 
@@ -170,10 +173,10 @@ void ()GasserThink =
 	{
 		self.think = self.th_die;
 		thinktime self : HX_FRAME_TIME;
-		//if (self.classname == "flare") {
-		//	flare_blast();
-		//	flare_rings();
-		//}
+		if (self.classname == "flare") {
+			flare_blast();
+			flare_rings();
+		}
  		remove(self);
 		return;
 	}
@@ -417,7 +420,7 @@ void() BlowUp3 =
 	local entity head;
 	local float dist;
 	
-	if (self.scale >= (1.35000*self.spellradiusmod) && !(self.drawflags & DRF_TRANSLUCENT))
+	if (self.scale >= (1.35000*self.spellradiusmod) && !self.drawflags & DRF_TRANSLUCENT)
 	{
 		
 		self.drawflags (+) DRF_TRANSLUCENT;

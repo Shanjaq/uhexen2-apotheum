@@ -1,3 +1,4 @@
+nosave float p_binds_setup;
 float player_count;
 float liquidcount;
 float multim;

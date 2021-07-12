@@ -4,6 +4,7 @@ void() lchain_launch;
 void() storm_ball_think =
 {
 	local float i;
+	local vector dir;
 	if (time < self.splash_time)
 	{
 		//dir = vectoangles (self.velocity);

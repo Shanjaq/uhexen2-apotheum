@@ -147,7 +147,7 @@ void() supernova_think =
 			setorigin(self, self.dest);
 		}
 	
-		if (self.type_index == 0)
+		if (self.camptime == 0)
 		{
 			if (self.attack_finished < time)
 			{
@@ -305,7 +305,7 @@ void() supernova_think =
 	{
 		if (time < (self.splash_time + 0.63750))
 		{
-			if ((self.type_index == 0) && (self.cnt == 0))
+			if ((self.camptime == 0) && (self.cnt == 0))
 			{
 				sound ( self, CHAN_AUTO, "antichkn.wav", 1.00000, ATTN_NORM);
 				self.cnt = 1;
@@ -354,7 +354,7 @@ void() spawn_supernova =
 	newmis.spelldamage = self.spelldamage;
 	newmis.spellradiusmod = self.spellradiusmod;
 	newmis.owner = self.owner;
-	newmis.type_index = 1;
+	newmis.camptime = 1;
 	setorigin(newmis, self.origin);
 	newmis.drawflags (+) (MLS_ABSLIGHT);
 	//newmis.effects = EF_BRIGHTLIGHT;

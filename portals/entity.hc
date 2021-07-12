@@ -535,7 +535,7 @@ void end_sys_fields;
 		// super_damage in the "player" struct which used to lead T_Damage()
 		// making a pentacle monster in tibet1.bsp invulnerable, because of
 		// super_damage becoming negative..
-		vector dest, dest1, dest2;	//9 spots unioned
+		//vector dest, dest1, dest2;	//9 spots unioned
 	};
 // Peanut ALL NEW CODE
 	//Status Effect Controller
@@ -686,7 +686,7 @@ void end_sys_fields;
 
 
 // Doors, etc.
-//.vector dest, dest1, dest2;
+.vector dest, dest1, dest2;
 .float wait;					// Time from firing to restarting
 .float delay;					// Time from activation to firing
 .entity trigger_field;			// Door's trigger entity
